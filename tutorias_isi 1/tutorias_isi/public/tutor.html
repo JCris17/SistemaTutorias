@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Tutorías - Panel del Tutor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-guindo: #800020;
+            --dark-guindo: #660019;
+            --light-guindo: #990025;
+            --lighter-guindo: #f9f0f2;
+            --accent-gold: #d4af37;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray-medium: #e9ecef;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: var(--primary-guindo);
+            color: var(--text-light);
+            transition: all 0.3s;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-header h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+            font-weight: 700;
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            padding: 12px 20px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255,255,255,0.1);
+            border-left-color: var(--accent-gold);
+            color: var(--text-light);
+        }
+        
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .top-navbar {
+            background-color: var(--text-light);
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-navbar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-guindo);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .content-area {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .page-header {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+        
+        .page-title {
+            color: var(--primary-guindo);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .card-header {
+            background-color: var(--lighter-guindo);
+            border-bottom: 1px solid var(--gray-medium);
+            padding: 15px 20px;
+            font-weight: 600;
+            color: var(--primary-guindo);
+            border-radius: 10px 10px 0 0 !important;
+        }
+        
+        .btn-custom {
+            background-color: var(--primary-guindo);
+            color: var(--text-light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-custom:hover {
+            background-color: var(--dark-guindo);
+            color: var(--text-light);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-custom {
+            background-color: transparent;
+            color: var(--primary-guindo);
+            border: 2px solid var(--primary-guindo);
+            padding: 8px 18px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--primary-guindo);
+            color: var(--text-light);
+        }
+        
+        .table-custom {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .table-custom thead {
+            background-color: var(--primary-guindo);
+            color: var(--text-light);
+        }
+        
+        .table-custom th {
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        .table-custom td {
+            padding: 15px;
+            vertical-align: middle;
+            border-color: var(--gray-medium);
+        }
+        
+        .badge-custom {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .badge-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .badge-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .badge-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .form-control, .form-select {
+            border: 2px solid var(--gray-medium);
+            border-radius: 8px;
+            padding: 10px 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-guindo);
+            box-shadow: 0 0 0 0.2rem rgba(128, 0, 32, 0.15);
+        }
+        
+        .stats-card {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stats-icon {
+            font-size: 2.5rem;
+            color: var(--primary-guindo);
+            margin-bottom: 15px;
+        }
+        
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-guindo);
+            margin-bottom: 5px;
+        }
+        
+        .stats-label {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .page-section {
+            display: none;
+        }
+        
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .calendar-day {
+            border: 1px solid var(--gray-medium);
+            padding: 10px;
+            height: 120px;
+            overflow-y: auto;
+        }
+        
+        .calendar-day.today {
+            background-color: var(--lighter-guindo);
+        }
+        
+        .calendar-event {
+            background-color: var(--primary-guindo);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-bottom: 2px;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .sidebar-menu {
+                display: flex;
+                overflow-x: auto;
+                padding: 10px;
+            }
+            
+            .nav-link {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                white-space: nowrap;
+            }
+            
+            .nav-link:hover, .nav-link.active {
+                border-left-color: transparent;
+                border-bottom-color: var(--accent-gold);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-graduation-cap me-2"></i>Panel del Tutor</h3>
+            </div>
+            <div class="sidebar-menu">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-page="dashboard">
+                            <i class="fas fa-tachometer-alt"></i> Mi Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="mistutorias">
+                            <i class="fas fa-chalkboard-teacher"></i> Mis Tutorías
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="asistencia">
+                            <i class="fas fa-clipboard-check"></i> Registrar Asistencia
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="horario">
+                            <i class="fas fa-calendar-alt"></i> Mi Horario
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="estudiantes">
+                            <i class="fas fa-user-graduate"></i> Mis Estudiantes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-page="recursos">
+                            <i class="fas fa-file-alt"></i> Recursos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Navbar -->
+            <div class="top-navbar">
+                <div>
+                    <h4 class="mb-0" id="current-page-title">Mi Dashboard</h4>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">CR</div>
+                    <div>
+                        <div class="fw-bold">Dr. Carlos Rodríguez</div>
+                        <div class="small text-muted">Tutor - Matemáticas</div>
+                    </div>
+                    <a href="landing.html" class="btn btn-outline-custom ms-3">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Dashboard Page -->
+                <div id="dashboard" class="page-section active">
+                    <div class="page-header">
+                        <h1 class="page-title">Mi Dashboard</h1>
+                        <p class="text-muted">Resumen de mis actividades como tutor</p>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card stats-card">
+                                <div class="stats-icon">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                                <div class="stats-number">5</div>
+                                <div class="stats-label">Tutorías Esta Semana</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card stats-card">
+                                <div class="stats-icon">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div class="stats-number">24</div>
+                                <div class="stats-label">Estudiantes Asignados</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card stats-card">
+                                <div class="stats-icon">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div class="stats-number">88%</div>
+                                <div class="stats-label">Asistencia Promedio</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card stats-card">
+                                <div class="stats-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stats-number">4.7</div>
+                                <div class="stats-label">Calificación</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-calendar-alt me-2"></i>Próximas Tutorías
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tutoría</th>
+                                                    <th>Fecha y Hora</th>
+                                                    <th>Estudiantes</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Matemáticas Avanzadas</td>
+                                                    <td>Hoy, 10:00 AM</td>
+                                                    <td>8</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-custom me-1">Preparar</button>
+                                                        <button class="btn btn-sm btn-custom">Iniciar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cálculo Diferencial</td>
+                                                    <td>Mañana, 2:00 PM</td>
+                                                    <td>6</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-custom me-1">Preparar</button>
+                                                        <button class="btn btn-sm btn-custom" disabled>Iniciar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Álgebra Lineal</td>
+                                                    <td>Viernes, 9:00 AM</td>
+                                                    <td>10</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-custom me-1">Preparar</button>
+                                                        <button class="btn btn-sm btn-custom" disabled>Iniciar</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-tasks me-2"></i>Tareas Pendientes
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="flex-shrink-0">
+                                            <input class="form-check-input mt-1" type="checkbox">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Preparar material para tutoría de Matemáticas Avanzadas</p>
+                                            <small class="text-muted">Para hoy</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="flex-shrink-0">
+                                            <input class="form-check-input mt-1" type="checkbox">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Revisar ejercicios de Álgebra Lineal</p>
+                                            <small class="text-muted">Para mañana</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <input class="form-check-input mt-1" type="checkbox" checked>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1 text-decoration-line-through">Enviar recordatorio a estudiantes</p>
+                                            <small class="text-muted">Completado</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mt-4">
+                                <div class="card-header">
+                                    <i class="fas fa-bell me-2"></i>Notificaciones
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-info-circle text-primary"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Nuevo estudiante asignado: Ana Martínez</p>
+                                            <small class="text-muted">Hace 2 horas</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-exclamation-triangle text-warning"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Recordatorio: Tutoría de Matemáticas hoy a las 10:00 AM</p>
+                                            <small class="text-muted">Hace 5 horas</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mis Tutorías Page -->
+                <div id="mistutorias" class="page-section">
+                    <div class="page-header">
+                        <h1 class="page-title">Mis Tutorías</h1>
+                        <p class="text-muted">Gestionar mis sesiones de tutoría</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-list me-2"></i>Mis Tutorías Programadas</span>
+                            <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#solicitarTutoriaModal">
+                                <i class="fas fa-plus me-1"></i> Solicitar Nueva Tutoría
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-custom">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Fecha y Hora</th>
+                                            <th>Estudiantes</th>
+                                            <th>Modalidad</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Matemáticas Avanzadas</td>
+                                            <td>15/11/2025 10:00</td>
+                                            <td>8</td>
+                                            <td>Presencial</td>
+                                            <td><span class="badge badge-custom badge-success">Confirmada</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cálculo Diferencial</td>
+                                            <td>16/11/2025 14:00</td>
+                                            <td>6</td>
+                                            <td>Virtual</td>
+                                            <td><span class="badge badge-custom badge-warning">Pendiente</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Álgebra Lineal</td>
+                                            <td>17/11/2025 09:00</td>
+                                            <td>10</td>
+                                            <td>Mixta</td>
+                                            <td><span class="badge badge-custom badge-success">Confirmada</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Geometría Analítica</td>
+                                            <td>18/11/2025 11:00</td>
+                                            <td>7</td>
+                                            <td>Presencial</td>
+                                            <td><span class="badge badge-custom badge-info">En Espera</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <i class="fas fa-history me-2"></i>Tutorías Pasadas
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Fecha</th>
+                                            <th>Asistencia</th>
+                                            <th>Material</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Matemáticas Básicas</td>
+                                            <td>10/11/2025</td>
+                                            <td>12/15</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Introducción al Cálculo</td>
+                                            <td>08/11/2025</td>
+                                            <td>10/12</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Estadística Descriptiva</td>
+                                            <td>05/11/2025</td>
+                                            <td>14/16</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Asistencia Page -->
+                <div id="asistencia" class="page-section">
+                    <div class="page-header">
+                        <h1 class="page-title">Registrar Asistencia</h1>
+                        <p class="text-muted">Controlar la asistencia de los estudiantes</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-clipboard-list me-2"></i>Registro de Asistencia
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="selectTutoria" class="form-label">Seleccionar Tutoría</label>
+                                        <select class="form-select" id="selectTutoria">
+                                            <option selected>Seleccione una tutoría...</option>
+                                            <option value="1">Matemáticas Avanzadas - Hoy 10:00 AM</option>
+                                            <option value="2">Cálculo Diferencial - Mañana 2:00 PM</option>
+                                            <option value="3">Álgebra Lineal - Viernes 9:00 AM</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Estudiante</th>
+                                                    <th>Asistencia</th>
+                                                    <th>Observaciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Ana Martínez</td>
+                                                    <td>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia1" id="presente1" checked>
+                                                            <label class="form-check-label" for="presente1">Presente</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia1" id="ausente1">
+                                                            <label class="form-check-label" for="ausente1">Ausente</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control form-control-sm" placeholder="Observaciones...">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Carlos López</td>
+                                                    <td>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia2" id="presente2">
+                                                            <label class="form-check-label" for="presente2">Presente</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia2" id="ausente2" checked>
+                                                            <label class="form-check-label" for="ausente2">Ausente</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control form-control-sm" value="Justificado - Enfermedad">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>María García</td>
+                                                    <td>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia3" id="presente3" checked>
+                                                            <label class="form-check-label" for="presente3">Presente</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia3" id="ausente3">
+                                                            <label class="form-check-label" for="ausente3">Ausente</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control form-control-sm" placeholder="Observaciones...">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-custom" id="guardarAsistencia">
+                                            <i class="fas fa-save me-1"></i> Guardar Asistencia
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-pie me-2"></i>Resumen de Asistencia
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="mb-4">
+                                        <h3 class="text-primary">88%</h3>
+                                        <p class="text-muted">Asistencia General</p>
+                                    </div>
+                                    <div class="d-flex justify-content-around mb-3">
+                                        <div>
+                                            <h5 class="text-success">21</h5>
+                                            <small>Presentes</small>
+                                        </div>
+                                        <div>
+                                            <h5 class="text-danger">3</h5>
+                                            <small>Ausentes</small>
+                                        </div>
+                                    </div>
+                                    <div class="progress mb-3" style="height: 10px;">
+                                        <div class="progress-bar bg-success" style="width: 88%"></div>
+                                    </div>
+                                    <small class="text-muted">Última tutoría: Matemáticas Básicas</small>
+                                </div>
+                            </div>
+                            
+                            <div class="card mt-4">
+                                <div class="card-header">
+                                    <i class="fas fa-history me-2"></i>Historial Reciente
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Matemáticas Básicas</span>
+                                            <span class="badge badge-custom badge-success">80%</span>
+                                        </div>
+                                        <small class="text-muted">10 Nov 2025</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Introducción al Cálculo</span>
+                                            <span class="badge badge-custom badge-warning">83%</span>
+                                        </div>
+                                        <small class="text-muted">8 Nov 2025</small>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Estadística Descriptiva</span>
+                                            <span class="badge badge-custom badge-success">88%</span>
+                                        </div>
+                                        <small class="text-muted">5 Nov 2025</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Horario Page -->
+                <div id="horario" class="page-section">
+                    <div class="page-header">
+                        <h1 class="page-title">Mi Horario</h1>
+                        <p class="text-muted">Gestionar mi disponibilidad y horario de tutorías</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-calendar-alt me-2"></i>Calendario de Tutorías
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <h4>Noviembre 2025</h4>
+                                        <div>
+                                            <button class="btn btn-outline-custom me-2">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </button>
+                                            <button class="btn btn-outline-custom">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>Lun</th>
+                                                    <th>Mar</th>
+                                                    <th>Mié</th>
+                                                    <th>Jue</th>
+                                                    <th>Vie</th>
+                                                    <th>Sáb</th>
+                                                    <th>Dom</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="calendar-day">27<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">28<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">29<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">30<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">31<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">1</td>
+                                                    <td class="calendar-day">2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="calendar-day">3</td>
+                                                    <td class="calendar-day">4</td>
+                                                    <td class="calendar-day">5</td>
+                                                    <td class="calendar-day">6</td>
+                                                    <td class="calendar-day">7</td>
+                                                    <td class="calendar-day">8</td>
+                                                    <td class="calendar-day">9</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="calendar-day">10</td>
+                                                    <td class="calendar-day">11</td>
+                                                    <td class="calendar-day">12</td>
+                                                    <td class="calendar-day">13</td>
+                                                    <td class="calendar-day">14</td>
+                                                    <td class="calendar-day">15</td>
+                                                    <td class="calendar-day today">16<br>
+                                                        <div class="calendar-event">Matemáticas 10:00</div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="calendar-day">17<br>
+                                                        <div class="calendar-event">Álgebra 9:00</div>
+                                                    </td>
+                                                    <td class="calendar-day">18<br>
+                                                        <div class="calendar-event">Geometría 11:00</div>
+                                                    </td>
+                                                    <td class="calendar-day">19</td>
+                                                    <td class="calendar-day">20</td>
+                                                    <td class="calendar-day">21</td>
+                                                    <td class="calendar-day">22</td>
+                                                    <td class="calendar-day">23</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="calendar-day">24</td>
+                                                    <td class="calendar-day">25</td>
+                                                    <td class="calendar-day">26</td>
+                                                    <td class="calendar-day">27</td>
+                                                    <td class="calendar-day">28</td>
+                                                    <td class="calendar-day">29</td>
+                                                    <td class="calendar-day">30</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-clock me-2"></i>Mi Disponibilidad
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <h5>Horario Semanal</h5>
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Lunes
+                                                <span class="badge badge-custom badge-info">9:00 - 13:00</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Martes
+                                                <span class="badge badge-custom badge-info">14:00 - 18:00</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Miércoles
+                                                <span class="badge badge-custom badge-info">9:00 - 13:00</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Jueves
+                                                <span class="badge badge-custom badge-info">14:00 - 18:00</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Viernes
+                                                <span class="badge badge-custom badge-info">9:00 - 12:00</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="d-grid">
+                                        <button class="btn btn-outline-custom" data-bs-toggle="modal" data-bs-target="#editarHorarioModal">
+                                            <i class="fas fa-edit me-1"></i> Editar Disponibilidad
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mt-4">
+                                <div class="card-header">
+                                    <i class="fas fa-list me-2"></i>Próximas Tutorías
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <h6>Hoy</h6>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Matemáticas Avanzadas</span>
+                                            <small class="text-muted">10:00</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <h6>Mañana</h6>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Cálculo Diferencial</span>
+                                            <small class="text-muted">14:00</small>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h6>Viernes</h6>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Álgebra Lineal</span>
+                                            <small class="text-muted">9:00</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mis Estudiantes Page -->
+                <div id="estudiantes" class="page-section">
+                    <div class="page-header">
+                        <h1 class="page-title">Mis Estudiantes</h1>
+                        <p class="text-muted">Gestionar la información de mis estudiantes</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-user-graduate me-2"></i>Lista de Estudiantes Asignados
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-custom">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Email</th>
+                                            <th>Asistencia</th>
+                                            <th>Última Tutoría</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Ana Martínez</td>
+                                            <td>ana.martinez@est.univalle.edu</td>
+                                            <td>92%</td>
+                                            <td>10/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Contactar</button>
+                                                <button class="btn btn-sm btn-outline-custom">Ver Progreso</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Carlos López</td>
+                                            <td>carlos.lopez@est.univalle.edu</td>
+                                            <td>75%</td>
+                                            <td>08/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Contactar</button>
+                                                <button class="btn btn-sm btn-outline-custom">Ver Progreso</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>María García</td>
+                                            <td>maria.garcia@est.univalle.edu</td>
+                                            <td>100%</td>
+                                            <td>10/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Contactar</button>
+                                                <button class="btn btn-sm btn-outline-custom">Ver Progreso</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>José Fernández</td>
+                                            <td>jose.fernandez@est.univalle.edu</td>
+                                            <td>83%</td>
+                                            <td>08/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Contactar</button>
+                                                <button class="btn btn-sm btn-outline-custom">Ver Progreso</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-2"></i>Rendimiento por Materia
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Matemáticas Avanzadas</span>
+                                            <span class="badge badge-custom badge-success">8.5/10</span>
+                                        </div>
+                                        <div class="progress mt-1" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Cálculo Diferencial</span>
+                                            <span class="badge badge-custom badge-warning">7.2/10</span>
+                                        </div>
+                                        <div class="progress mt-1" style="height: 8px;">
+                                            <div class="progress-bar bg-warning" style="width: 72%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Álgebra Lineal</span>
+                                            <span class="badge badge-custom badge-success">8.8/10</span>
+                                        </div>
+                                        <div class="progress mt-1" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 88%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-comments me-2"></i>Comentarios Recientes
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <p class="mb-1">"Excelente explicación sobre derivadas parciales"</p>
+                                        <small class="text-muted">- Ana Martínez, 10/11/2025</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <p class="mb-1">"Los ejercicios prácticos fueron muy útiles"</p>
+                                        <small class="text-muted">- Carlos López, 08/11/2025</small>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1">"Material muy claro y bien organizado"</p>
+                                        <small class="text-muted">- María García, 05/11/2025</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recursos Page -->
+                <div id="recursos" class="page-section">
+                    <div class="page-header">
+                        <h1 class="page-title">Recursos</h1>
+                        <p class="text-muted">Gestionar materiales y recursos para las tutorías</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-folder me-2"></i>Mis Recursos</span>
+                            <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#subirRecursoModal">
+                                <i class="fas fa-upload me-1"></i> Subir Recurso
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-file-pdf fa-3x text-danger mb-3"></i>
+                                            <h5>Guía de Matemáticas</h5>
+                                            <p class="text-muted">PDF - 2.4 MB</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-custom btn-sm">Descargar</button>
+                                                <button class="btn btn-outline-custom btn-sm">Compartir</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            Subido: 05/11/2025
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-file-excel fa-3x text-success mb-3"></i>
+                                            <h5>Ejercicios de Cálculo</h5>
+                                            <p class="text-muted">XLSX - 1.8 MB</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-custom btn-sm">Descargar</button>
+                                                <button class="btn btn-outline-custom btn-sm">Compartir</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            Subido: 03/11/2025
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-file-video fa-3x text-primary mb-3"></i>
+                                            <h5>Video - Álgebra Lineal</h5>
+                                            <p class="text-muted">MP4 - 15.2 MB</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-custom btn-sm">Ver</button>
+                                                <button class="btn btn-outline-custom btn-sm">Compartir</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            Subido: 01/11/2025
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <i class="fas fa-link me-2"></i>Enlaces Útiles
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Khan Academy - Matemáticas
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Wolfram Alpha - Calculadora
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    GeoGebra - Geometría Interactiva
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Solicitar Tutoría -->
+    <div class="modal fade" id="solicitarTutoriaModal" tabindex="-1" aria-labelledby="solicitarTutoriaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="solicitarTutoriaModalLabel">Solicitar Nueva Tutoría</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="materiaTutoria" class="form-label">Materia</label>
+                            <input type="text" class="form-control" id="materiaTutoria" placeholder="Ej: Matemáticas Avanzadas">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fechaTutoria" class="form-label">Fecha Preferida</label>
+                            <input type="date" class="form-control" id="fechaTutoria">
+                        </div>
+                        <div class="mb-3">
+                            <label for="horaTutoria" class="form-label">Hora Preferida</label>
+                            <input type="time" class="form-control" id="horaTutoria">
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalidadTutoria" class="form-label">Modalidad</label>
+                            <select class="form-select" id="modalidadTutoria">
+                                <option value="presencial">Presencial</option>
+                                <option value="virtual">Virtual</option>
+                                <option value="mixta">Mixta</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcionTutoria" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcionTutoria" rows="3" placeholder="Describa los temas a tratar..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-custom">Enviar Solicitud</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Horario -->
+    <div class="modal fade" id="editarHorarioModal" tabindex="-1" aria-labelledby="editarHorarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarHorarioModalLabel">Editar Mi Disponibilidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Lunes</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="09:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="13:00">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Martes</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="14:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="18:00">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Miércoles</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="09:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="13:00">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Jueves</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="14:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="18:00">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Viernes</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="09:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="12:00">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-custom">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Subir Recurso -->
+    <div class="modal fade" id="subirRecursoModal" tabindex="-1" aria-labelledby="subirRecursoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="subirRecursoModalLabel">Subir Nuevo Recurso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombreRecurso" class="form-label">Nombre del Recurso</label>
+                            <input type="text" class="form-control" id="nombreRecurso" placeholder="Ej: Guía de Ejercicios">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipoRecurso" class="form-label">Tipo de Recurso</label>
+                            <select class="form-select" id="tipoRecurso">
+                                <option value="documento">Documento</option>
+                                <option value="presentacion">Presentación</option>
+                                <option value="video">Video</option>
+                                <option value="enlace">Enlace</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="archivoRecurso" class="form-label">Archivo</label>
+                            <input class="form-control" type="file" id="archivoRecurso">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcionRecurso" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcionRecurso" rows="3" placeholder="Descripción del recurso..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-custom">Subir Recurso</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navegación entre páginas
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remover clase active de todos los enlaces
+                document.querySelectorAll('.nav-link').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Agregar clase active al enlace clickeado
+                this.classList.add('active');
+                
+                // Ocultar todas las páginas
+                document.querySelectorAll('.page-section').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Mostrar la página correspondiente
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+                
+                // Actualizar título de la página
+                const pageTitle = this.textContent.trim();
+                document.getElementById('current-page-title').textContent = pageTitle;
+            });
+        });
+        
+        // Simular funcionalidad de guardar asistencia
+        document.getElementById('guardarAsistencia').addEventListener('click', function() {
+            alert('Asistencia guardada correctamente');
+        });
+        
+        // Simular funcionalidad de subir recurso
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            if (button.textContent.includes('Subir Recurso')) {
+                button.addEventListener('click', function() {
+                    alert('Recurso subido correctamente');
+                    // Cerrar el modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('subirRecursoModal'));
+                    modal.hide();
+                });
+            }
+        });
+        
+        // Simular funcionalidad de solicitar tutoría
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            if (button.textContent.includes('Enviar Solicitud')) {
+                button.addEventListener('click', function() {
+                    alert('Solicitud de tutoría enviada correctamente');
+                    // Cerrar el modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('solicitarTutoriaModal'));
+                    modal.hide();
+                });
+            }
+        });
+        
+        // Simular funcionalidad de editar horario
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            if (button.textContent.includes('Guardar Cambios')) {
+                button.addEventListener('click', function() {
+                    alert('Horario actualizado correctamente');
+                    // Cerrar el modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editarHorarioModal'));
+                    modal.hide();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
