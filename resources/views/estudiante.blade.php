@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @php
     
     $tutorias_inscritas = $tutorias_inscritas ?? collect([]);
@@ -8,6 +9,8 @@
     $tutores = $tutores ?? collect([]);
     
 @endphp
+=======
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -370,6 +373,7 @@
     </style>
 </head>
 <body>
+<<<<<<< HEAD
     @php
         // Inicializar todas las variables para evitar errores
         $tutorias_inscritas = $tutorias_inscritas ?? collect([]);
@@ -404,6 +408,8 @@
         </div>
     @endif
 
+=======
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
@@ -454,6 +460,7 @@
                     <h4 class="mb-0" id="current-page-title">Mi Dashboard</h4>
                 </div>
                 <div class="user-info">
+<<<<<<< HEAD
                     <div class="user-avatar">{{ substr($estudiante->name, 0, 2) }}</div>
                     <div>
                         <div class="fw-bold">{{ Auth::user()->name }}</div>
@@ -465,6 +472,19 @@
                             <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                         </button>
                     </form>
+=======
+                    <div class="user-avatar">AM</div>
+                    <div>
+                        <div class="fw-bold">Ana Martínez</div>
+                        <div class="small text-muted">Estudiante - Ing. Sistemas</div>
+                    </div>
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+    @csrf
+    <button type="submit" class="btn btn-outline-custom ms-3">
+        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+    </button>
+</form>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                 </div>
             </div>
             
@@ -483,7 +503,11 @@
                                 <div class="stats-icon">
                                     <i class="fas fa-chalkboard-teacher"></i>
                                 </div>
+<<<<<<< HEAD
                                 <div class="stats-number">{{ $tutorias_inscritas_count ?? 0 }}</div>
+=======
+                                <div class="stats-number">3</div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 <div class="stats-label">Tutorías Esta Semana</div>
                             </div>
                         </div>
@@ -492,7 +516,11 @@
                                 <div class="stats-icon">
                                     <i class="fas fa-percentage"></i>
                                 </div>
+<<<<<<< HEAD
                                 <div class="stats-number">{{ $porcentaje_asistencia ?? 0 }}%</div>
+=======
+                                <div class="stats-number">92%</div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 <div class="stats-label">Asistencia</div>
                             </div>
                         </div>
@@ -501,7 +529,11 @@
                                 <div class="stats-icon">
                                     <i class="fas fa-star"></i>
                                 </div>
+<<<<<<< HEAD
                                 <div class="stats-number">{{ $promedio_general ?? 0 }}</div>
+=======
+                                <div class="stats-number">8.5</div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 <div class="stats-label">Promedio</div>
                             </div>
                         </div>
@@ -510,7 +542,11 @@
                                 <div class="stats-icon">
                                     <i class="fas fa-tasks"></i>
                                 </div>
+<<<<<<< HEAD
                                 <div class="stats-number">{{ $tareas_pendientes_count ?? 0 }}</div>
+=======
+                                <div class="stats-number">5</div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 <div class="stats-label">Tareas Pendientes</div>
                             </div>
                         </div>
@@ -535,6 +571,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+<<<<<<< HEAD
                                                 @forelse($proximas_tutorias ?? [] as $tutoria)
                                                 @php
                                                     $tutor = App\Models\User::find($tutoria->id_tutor);
@@ -573,6 +610,35 @@
                                                     <td colspan="5" class="text-center">No tienes tutorías programadas</td>
                                                 </tr>
                                                 @endforelse
+=======
+                                                <tr>
+                                                    <td>Matemáticas Avanzadas</td>
+                                                    <td>Dr. Carlos Rodríguez</td>
+                                                    <td>Hoy, 10:00 AM</td>
+                                                    <td><span class="badge badge-custom badge-success">Inscrito</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-custom">Ver Detalles</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Programación en Python</td>
+                                                    <td>Ing. María González</td>
+                                                    <td>Mañana, 2:00 PM</td>
+                                                    <td><span class="badge badge-custom badge-success">Inscrito</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-custom">Ver Detalles</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Base de Datos</td>
+                                                    <td>Lic. Roberto Silva</td>
+                                                    <td>Viernes, 9:00 AM</td>
+                                                    <td><span class="badge badge-custom badge-warning">Pendiente</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-custom">Ver Detalles</button>
+                                                    </td>
+                                                </tr>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             </tbody>
                                         </table>
                                     </div>
@@ -585,6 +651,7 @@
                                     <i class="fas fa-bell me-2"></i>Notificaciones Recientes
                                 </div>
                                 <div class="card-body">
+<<<<<<< HEAD
                                     @forelse($notificaciones ?? [] as $notificacion)
                                     <div class="d-flex align-items-start mb-3">
                                         <div class="flex-shrink-0">
@@ -601,6 +668,35 @@
                                         <p>No hay notificaciones recientes</p>
                                     </div>
                                     @endforelse
+=======
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-info-circle text-primary"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Recordatorio: Tutoría de Matemáticas hoy a las 10:00 AM</p>
+                                            <small class="text-muted">Hace 2 horas</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-check-circle text-success"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Tu solicitud de tutoría ha sido aprobada</p>
+                                            <small class="text-muted">Ayer</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-exclamation-triangle text-warning"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Nuevo material disponible para Matemáticas</p>
+                                            <small class="text-muted">Hace 3 días</small>
+                                        </div>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                             
@@ -609,6 +705,7 @@
                                     <i class="fas fa-tasks me-2"></i>Mis Tareas Pendientes
                                 </div>
                                 <div class="card-body">
+<<<<<<< HEAD
                                     @forelse($tareas_pendientes ?? [] as $tarea)
                                     <div class="d-flex align-items-start mb-3">
                                         <div class="flex-shrink-0">
@@ -626,12 +723,42 @@
                                         <p>No hay tareas pendientes</p>
                                     </div>
                                     @endforelse
+=======
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="flex-shrink-0">
+                                            <input class="form-check-input mt-1" type="checkbox">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Resolver ejercicios de derivadas</p>
+                                            <small class="text-muted">Para mañana</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="flex-shrink-0">
+                                            <input class="form-check-input mt-1" type="checkbox">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Preparar presentación de Python</p>
+                                            <small class="text-muted">Para el viernes</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <input class="form-check-input mt-1" type="checkbox" checked>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1 text-decoration-line-through">Revisar material de Base de Datos</p>
+                                            <small class="text-muted">Completado</small>
+                                        </div>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
+<<<<<<< HEAD
                <!-- Mis Tutorías Page -->
 <div id="mistutorias" class="page-section">
     <div class="page-header">
@@ -860,6 +987,330 @@
         </div>
     </div>
 </div>
+=======
+                <!-- Mis Tutorías Page -->
+                <div id="mistutorias" class="page-section">
+                    <div class="page-header">
+                        <h1 class="page-title">Mis Tutorías</h1>
+                        <p class="text-muted">Gestionar mis sesiones de tutoría</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-list me-2"></i>Tutorías Inscritas
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-custom">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Tutor</th>
+                                            <th>Fecha y Hora</th>
+                                            <th>Modalidad</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Matemáticas Avanzadas</td>
+                                            <td>Dr. Carlos Rodríguez</td>
+                                            <td>15/11/2025 10:00</td>
+                                            <td>Presencial</td>
+                                            <td><span class="badge badge-custom badge-success">Activa</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Ver Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programación en Python</td>
+                                            <td>Ing. María González</td>
+                                            <td>16/11/2025 14:00</td>
+                                            <td>Virtual</td>
+                                            <td><span class="badge badge-custom badge-success">Activa</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Ver Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Base de Datos</td>
+                                            <td>Lic. Roberto Silva</td>
+                                            <td>17/11/2025 09:00</td>
+                                            <td>Mixta</td>
+                                            <td><span class="badge badge-custom badge-warning">Pendiente</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Ver Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <i class="fas fa-history me-2"></i>Historial de Tutorías
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Tutor</th>
+                                            <th>Fecha</th>
+                                            <th>Asistencia</th>
+                                            <th>Material</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Matemáticas Básicas</td>
+                                            <td>Dr. Carlos Rodríguez</td>
+                                            <td>10/11/2025</td>
+                                            <td><span class="badge badge-custom badge-success">Presente</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Introducción a Python</td>
+                                            <td>Ing. María González</td>
+                                            <td>08/11/2025</td>
+                                            <td><span class="badge badge-custom badge-success">Presente</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>SQL Básico</td>
+                                            <td>Lic. Roberto Silva</td>
+                                            <td>05/11/2025</td>
+                                            <td><span class="badge badge-custom badge-danger">Ausente</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Inscribirse Page -->
+                <div id="inscribirse" class="page-section">
+                    <div class="page-header">
+                        <h1 class="page-title">Inscribirse en Tutorías</h1>
+                        <p class="text-muted">Explora y inscríbete en tutorías disponibles</p>
+                    </div>
+                    
+                    <!-- Tutorías Invitadas -->
+                    <div class="card mb-4 invitation-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-envelope me-2"></i>Tutorías Invitadas</span>
+                            <span class="badge badge-custom badge-primary">3 nuevas</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted mb-3">Los tutores te han invitado directamente a estas tutorías. Puedes aceptar o rechazar la invitación.</p>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tutoría</th>
+                                            <th>Tutor</th>
+                                            <th>Fecha y Hora</th>
+                                            <th>Modalidad</th>
+                                            <th>Mensaje del Tutor</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Matemáticas Avanzadas - Grupo Especial</td>
+                                            <td>Dr. Carlos Rodríguez</td>
+                                            <td>18/11/2025 16:00</td>
+                                            <td>Presencial</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Hola Ana, he notado tu excelente rendimiento en matemáticas y me gustaría invitarte a este grupo especial para profundizar en temas avanzados. Espero puedas asistir.">
+                                                    <i class="fas fa-comment"></i> Ver Mensaje
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-success me-1">
+                                                    <i class="fas fa-check"></i> Aceptar
+                                                </button>
+                                                <button class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-times"></i> Rechazar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Preparación para Examen Final</td>
+                                            <td>Ing. María González</td>
+                                            <td>20/11/2025 10:00</td>
+                                            <td>Virtual</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Ana, he organizado esta sesión especial de repaso para el examen final. Sería ideal que participes para reforzar los conceptos clave.">
+                                                    <i class="fas fa-comment"></i> Ver Mensaje
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-success me-1">
+                                                    <i class="fas fa-check"></i> Aceptar
+                                                </button>
+                                                <button class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-times"></i> Rechazar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Proyecto Integrador - Asesoría</td>
+                                            <td>Lic. Roberto Silva</td>
+                                            <td>22/11/2025 14:00</td>
+                                            <td>Mixta</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom" data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Hola Ana, he revisado tu progreso y creo que esta sesión te ayudará con el proyecto integrador. Espero contar con tu participación.">
+                                                    <i class="fas fa-comment"></i> Ver Mensaje
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-sm btn-success me-1">
+                                                    <i class="fas fa-check"></i> Aceptar
+                                                </button>
+                                                <button class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-times"></i> Rechazar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-filter me-2"></i>Filtrar Tutorías
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="filtroMateria" class="form-label">Materia</label>
+                                        <select class="form-select" id="filtroMateria">
+                                            <option selected>Todas las materias</option>
+                                            <option>Matemáticas</option>
+                                            <option>Programación</option>
+                                            <option>Base de Datos</option>
+                                            <option>Estadística</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="filtroModalidad" class="form-label">Modalidad</label>
+                                        <select class="form-select" id="filtroModalidad">
+                                            <option selected>Todas las modalidades</option>
+                                            <option>Presencial</option>
+                                            <option>Virtual</option>
+                                            <option>Mixta</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="filtroTutor" class="form-label">Tutor</label>
+                                        <select class="form-select" id="filtroTutor">
+                                            <option selected>Todos los tutores</option>
+                                            <option>Dr. Carlos Rodríguez</option>
+                                            <option>Ing. María González</option>
+                                            <option>Lic. Roberto Silva</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-custom w-100">Aplicar Filtros</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-list me-2"></i>Tutorías Disponibles
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Matemáticas Avanzadas</h5>
+                                                    <p class="card-text"><strong>Tutor:</strong> Dr. Carlos Rodríguez</p>
+                                                    <p class="card-text"><strong>Fecha:</strong> 18/11/2025 10:00</p>
+                                                    <p class="card-text"><strong>Modalidad:</strong> Presencial</p>
+                                                    <p class="card-text"><strong>Cupos:</strong> 5/12</p>
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-custom">Inscribirse</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Programación en Python</h5>
+                                                    <p class="card-text"><strong>Tutor:</strong> Ing. María González</p>
+                                                    <p class="card-text"><strong>Fecha:</strong> 19/11/2025 14:00</p>
+                                                    <p class="card-text"><strong>Modalidad:</strong> Virtual</p>
+                                                    <p class="card-text"><strong>Cupos:</strong> 8/15</p>
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-custom">Inscribirse</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Base de Datos Avanzada</h5>
+                                                    <p class="card-text"><strong>Tutor:</strong> Lic. Roberto Silva</p>
+                                                    <p class="card-text"><strong>Fecha:</strong> 20/11/2025 09:00</p>
+                                                    <p class="card-text"><strong>Modalidad:</strong> Mixta</p>
+                                                    <p class="card-text"><strong>Cupos:</strong> 3/10</p>
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-custom">Inscribirse</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Estadística Aplicada</h5>
+                                                    <p class="card-text"><strong>Tutor:</strong> Dr. Carlos Rodríguez</p>
+                                                    <p class="card-text"><strong>Fecha:</strong> 21/11/2025 11:00</p>
+                                                    <p class="card-text"><strong>Modalidad:</strong> Virtual</p>
+                                                    <p class="card-text"><strong>Cupos:</strong> 12/20</p>
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-custom">Inscribirse</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                 <!-- Progreso Page -->
                 <div id="progreso" class="page-section">
                     <div class="page-header">
@@ -876,6 +1327,7 @@
                                 <div class="card-body">
                                     <div class="row text-center mb-4">
                                         <div class="col-md-4">
+<<<<<<< HEAD
                                             <h3 class="text-primary">{{ $porcentaje_asistencia ?? 0 }}%</h3>
                                             <p class="text-muted">Asistencia</p>
                                         </div>
@@ -885,11 +1337,23 @@
                                         </div>
                                         <div class="col-md-4">
                                             <h3 class="text-info">{{ $total_tutorias_completadas ?? 0 }}</h3>
+=======
+                                            <h3 class="text-primary">92%</h3>
+                                            <p class="text-muted">Asistencia</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h3 class="text-success">8.5</h3>
+                                            <p class="text-muted">Promedio General</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h3 class="text-info">15</h3>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             <p class="text-muted">Tutorías Completadas</p>
                                         </div>
                                     </div>
                                     
                                     <h5 class="mb-3">Rendimiento por Materia</h5>
+<<<<<<< HEAD
                                     @foreach($rendimiento_materias as $materia => $datos)
                                     <div class="mb-3">
                                         <div class="d-flex justify-content-between mb-1">
@@ -905,6 +1369,44 @@
                                         </div>
                                     </div>
                                     @endforeach
+=======
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span>Matemáticas</span>
+                                            <span>8.7/10</span>
+                                        </div>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-success" style="width: 87%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span>Programación</span>
+                                            <span>8.5/10</span>
+                                        </div>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-success" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span>Base de Datos</span>
+                                            <span>7.8/10</span>
+                                        </div>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-warning" style="width: 78%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span>Estadística</span>
+                                            <span>9.0/10</span>
+                                        </div>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-success" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                         </div>
@@ -915,23 +1417,41 @@
                                 </div>
                                 <div class="card-body text-center">
                                     <div class="mb-4">
+<<<<<<< HEAD
                                         <h3 class="text-primary">{{ $porcentaje_asistencia ?? 0 }}%</h3>
+=======
+                                        <h3 class="text-primary">92%</h3>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                         <p class="text-muted">Asistencia General</p>
                                     </div>
                                     <div class="d-flex justify-content-around mb-3">
                                         <div>
+<<<<<<< HEAD
                                             <h5 class="text-success">{{ $asistencias_presente ?? 0 }}</h5>
                                             <small>Presente</small>
                                         </div>
                                         <div>
                                             <h5 class="text-danger">{{ $asistencias_ausente ?? 0 }}</h5>
+=======
+                                            <h5 class="text-success">23</h5>
+                                            <small>Presente</small>
+                                        </div>
+                                        <div>
+                                            <h5 class="text-danger">2</h5>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             <small>Ausente</small>
                                         </div>
                                     </div>
                                     <div class="progress mb-3" style="height: 10px;">
+<<<<<<< HEAD
                                         <div class="progress-bar bg-success" style="width: {{ $porcentaje_asistencia ?? 0 }}%"></div>
                                     </div>
                                     <small class="text-muted">Basado en {{ $total_asistencias ?? 0 }} tutorías</small>
+=======
+                                        <div class="progress-bar bg-success" style="width: 92%"></div>
+                                    </div>
+                                    <small class="text-muted">Basado en 25 tutorías</small>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                             
@@ -940,6 +1460,7 @@
                                     <i class="fas fa-award me-2"></i>Logros
                                 </div>
                                 <div class="card-body">
+<<<<<<< HEAD
                                     @foreach($logros as $logro)
                                     <div class="d-flex align-items-start mb-3">
                                         <div class="flex-shrink-0">
@@ -951,6 +1472,35 @@
                                         </div>
                                     </div>
                                     @endforeach
+=======
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-medal text-warning"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Asistencia Perfecta</p>
+                                            <small class="text-muted">Asististe a 10 tutorías consecutivas</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start mb-3">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-star text-info"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Excelente Rendimiento</p>
+                                            <small class="text-muted">Promedio mayor a 8.5 en Matemáticas</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-trophy text-success"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="mb-1">Participación Activa</p>
+                                            <small class="text-muted">Completaste 15 tutorías</small>
+                                        </div>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                         </div>
@@ -973,6 +1523,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+<<<<<<< HEAD
                                         @forelse($evaluaciones_lista as $evaluacion)
                                         @php
                                             $tutoria = App\Models\Tutoria::find($evaluacion->id_tutoria);
@@ -991,6 +1542,29 @@
                                             <td colspan="5" class="text-center">No hay evaluaciones registradas</td>
                                         </tr>
                                         @endforelse
+=======
+                                        <tr>
+                                            <td>Matemáticas Avanzadas</td>
+                                            <td>Dr. Carlos Rodríguez</td>
+                                            <td>10/11/2025</td>
+                                            <td>9.0</td>
+                                            <td>Excelente comprensión de los conceptos</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programación Python</td>
+                                            <td>Ing. María González</td>
+                                            <td>08/11/2025</td>
+                                            <td>8.5</td>
+                                            <td>Buen trabajo en los ejercicios prácticos</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Base de Datos</td>
+                                            <td>Lic. Roberto Silva</td>
+                                            <td>05/11/2025</td>
+                                            <td>7.5</td>
+                                            <td>Necesita practicar más consultas complejas</td>
+                                        </tr>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                     </tbody>
                                 </table>
                             </div>
@@ -1011,6 +1585,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+<<<<<<< HEAD
                                 @foreach($materiales_por_materia as $materia => $materiales)
                                 <div class="col-md-4 mb-4">
                                     <div class="card h-100">
@@ -1022,11 +1597,48 @@
                                                 <button class="btn btn-outline-custom btn-sm btn-explorar-materia" data-materia="{{ $materia }}">
                                                     Explorar
                                                 </button>
+=======
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-calculator fa-3x text-primary mb-3"></i>
+                                            <h5>Matemáticas</h5>
+                                            <p class="text-muted">5 archivos disponibles</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-custom btn-sm">Explorar</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-code fa-3x text-success mb-3"></i>
+                                            <h5>Programación</h5>
+                                            <p class="text-muted">8 archivos disponibles</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-custom btn-sm">Explorar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-database fa-3x text-warning mb-3"></i>
+                                            <h5>Base de Datos</h5>
+                                            <p class="text-muted">3 archivos disponibles</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-custom btn-sm">Explorar</button>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<<<<<<< HEAD
                                 @endforeach
+=======
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                             </div>
                         </div>
                     </div>
@@ -1048,6 +1660,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+<<<<<<< HEAD
                                         @forelse($materiales_recientes as $material)
                                         <tr>
                                             <td>{{ $material->nombre ?? 'Sin nombre' }}</td>
@@ -1065,6 +1678,41 @@
                                             <td colspan="5" class="text-center">No hay materiales disponibles</td>
                                         </tr>
                                         @endforelse
+=======
+                                        <tr>
+                                            <td>Guía de Ejercicios - Derivadas</td>
+                                            <td>Matemáticas</td>
+                                            <td>PDF</td>
+                                            <td>10/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ejemplos de Código Python</td>
+                                            <td>Programación</td>
+                                            <td>ZIP</td>
+                                            <td>08/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Video - Consultas SQL Avanzadas</td>
+                                            <td>Base de Datos</td>
+                                            <td>MP4</td>
+                                            <td>05/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-play"></i> Ver
+                                                </button>
+                                            </td>
+                                        </tr>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                     </tbody>
                                 </table>
                             </div>
@@ -1077,12 +1725,27 @@
                         </div>
                         <div class="card-body">
                             <div class="list-group">
+<<<<<<< HEAD
                                 @foreach($enlaces_utiles as $enlace)
                                 <a href="{{ $enlace['url'] ?? '#' }}" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                     {{ $enlace['nombre'] ?? 'Enlace' }}
                                     <i class="fas fa-external-link-alt"></i>
                                 </a>
                                 @endforeach
+=======
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Khan Academy - Matemáticas
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    W3Schools - Programación
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    SQLZoo - Práctica de SQL
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                             </div>
                         </div>
                     </div>
@@ -1102,12 +1765,20 @@
                                     <i class="fas fa-question-circle me-2"></i>Nueva Solicitud
                                 </div>
                                 <div class="card-body">
+<<<<<<< HEAD
                                     <form method="POST" action="{{ route('estudiante.solicitudes.crear') }}">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="tipoSolicitud" class="form-label">Tipo de Solicitud</label>
                                             <select class="form-select" id="tipoSolicitud" name="tipo" required>
                                                 <option value="">Seleccione el tipo de solicitud...</option>
+=======
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="tipoSolicitud" class="form-label">Tipo de Solicitud</label>
+                                            <select class="form-select" id="tipoSolicitud">
+                                                <option selected>Seleccione el tipo de solicitud...</option>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                                 <option value="tutoria">Tutoría Personalizada</option>
                                                 <option value="material">Material Adicional</option>
                                                 <option value="duda">Consulta Específica</option>
@@ -1116,29 +1787,54 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="materiaSolicitud" class="form-label">Materia</label>
+<<<<<<< HEAD
                                             <select class="form-select" id="materiaSolicitud" name="materia" required>
                                                 <option value="">Seleccione una materia...</option>
                                                 @foreach($materias as $materia)
                                                 <option value="{{ $materia }}">{{ $materia }}</option>
                                                 @endforeach
+=======
+                                            <select class="form-select" id="materiaSolicitud">
+                                                <option selected>Seleccione una materia...</option>
+                                                <option>Matemáticas</option>
+                                                <option>Programación</option>
+                                                <option>Base de Datos</option>
+                                                <option>Estadística</option>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="tutorPreferido" class="form-label">Tutor Preferido (Opcional)</label>
+<<<<<<< HEAD
                                             <select class="form-select" id="tutorPreferido" name="id_tutor">
                                                 <option value="">Sin preferencia</option>
                                                 @foreach($tutores as $tutor)
                                                 <option value="{{ $tutor->id }}">{{ $tutor->name }}</option>
                                                 @endforeach
+=======
+                                            <select class="form-select" id="tutorPreferido">
+                                                <option selected>Sin preferencia</option>
+                                                <option>Dr. Carlos Rodríguez</option>
+                                                <option>Ing. María González</option>
+                                                <option>Lic. Roberto Silva</option>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="descripcionSolicitud" class="form-label">Descripción</label>
+<<<<<<< HEAD
                                             <textarea class="form-control" id="descripcionSolicitud" name="descripcion" rows="4" placeholder="Describe detalladamente tu solicitud..." required></textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="urgenciaSolicitud" class="form-label">Nivel de Urgencia</label>
                                             <select class="form-select" id="urgenciaSolicitud" name="urgencia" required>
+=======
+                                            <textarea class="form-control" id="descripcionSolicitud" rows="4" placeholder="Describe detalladamente tu solicitud..."></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="urgenciaSolicitud" class="form-label">Nivel de Urgencia</label>
+                                            <select class="form-select" id="urgenciaSolicitud">
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                                 <option value="baja">Baja</option>
                                                 <option value="media" selected>Media</option>
                                                 <option value="alta">Alta</option>
@@ -1155,6 +1851,7 @@
                                     <i class="fas fa-history me-2"></i>Mis Solicitudes Recientes
                                 </div>
                                 <div class="card-body">
+<<<<<<< HEAD
                                     @forelse($solicitudes_recientes as $solicitud)
                                     <div class="mb-3">
                                         <h6>{{ ucfirst($solicitud->tipo) }} - {{ $solicitud->materia }}</h6>
@@ -1170,6 +1867,23 @@
                                         <p>No hay solicitudes recientes</p>
                                     </div>
                                     @endforelse
+=======
+                                    <div class="mb-3">
+                                        <h6>Tutoría de Matemáticas</h6>
+                                        <p class="mb-1 small">Solicitado: 10/11/2025</p>
+                                        <span class="badge badge-custom badge-success">Aprobado</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <h6>Material adicional de Python</h6>
+                                        <p class="mb-1 small">Solicitado: 08/11/2025</p>
+                                        <span class="badge badge-custom badge-warning">En Proceso</span>
+                                    </div>
+                                    <div>
+                                        <h6>Consulta sobre SQL</h6>
+                                        <p class="mb-1 small">Solicitado: 05/11/2025</p>
+                                        <span class="badge badge-custom badge-success">Resuelto</span>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                             
@@ -1202,8 +1916,25 @@
                     <h5 class="modal-title" id="detallesTutoriaModalLabel">Detalles de la Tutoría</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+<<<<<<< HEAD
                 <div class="modal-body" id="detalles-tutoria-body">
                     <!-- Los detalles se cargarán dinámicamente -->
+=======
+                <div class="modal-body">
+                    <h5>Matemáticas Avanzadas</h5>
+                    <p><strong>Tutor:</strong> Dr. Carlos Rodríguez</p>
+                    <p><strong>Fecha y Hora:</strong> 15/11/2025, 10:00 AM</p>
+                    <p><strong>Modalidad:</strong> Presencial</p>
+                    <p><strong>Ubicación:</strong> Aula 302, Edificio Principal</p>
+                    <p><strong>Duración:</strong> 2 horas</p>
+                    <p><strong>Temas a tratar:</strong></p>
+                    <ul>
+                        <li>Derivadas parciales</li>
+                        <li>Integrales múltiples</li>
+                        <li>Aplicaciones prácticas</li>
+                    </ul>
+                    <p><strong>Material requerido:</strong> Calculadora científica, cuaderno de ejercicios</p>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -1242,6 +1973,7 @@
             });
         });
         
+<<<<<<< HEAD
         // Funcionalidad para ver detalles de tutoría
         document.querySelectorAll('.btn-ver-detalles').forEach(button => {
             button.addEventListener('click', function() {
@@ -1428,6 +2160,90 @@ document.getElementById('filtrosForm')?.addEventListener('submit', function() {
                 bsAlert.close();
             });
         }, 5000);
+=======
+        // Simular funcionalidad de inscripción
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            if (button.textContent.includes('Inscribirse')) {
+                button.addEventListener('click', function() {
+                    alert('Te has inscrito correctamente en la tutoría');
+                    this.textContent = 'Inscrito';
+                    this.disabled = true;
+                    this.classList.remove('btn-custom');
+                    this.classList.add('btn-outline-custom');
+                });
+            }
+        });
+        
+        // Simular funcionalidad de enviar solicitud
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            if (button.textContent.includes('Enviar Solicitud')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Tu solicitud ha sido enviada correctamente');
+                });
+            }
+        });
+        
+        // Simular funcionalidad de ver detalles
+        document.querySelectorAll('.btn-outline-custom').forEach(button => {
+            if (button.textContent.includes('Ver Detalles')) {
+                button.addEventListener('click', function() {
+                    // En una implementación real, esto mostraría un modal con los detalles específicos
+                    const modal = new bootstrap.Modal(document.getElementById('detallesTutoriaModal'));
+                    modal.show();
+                });
+            }
+        });
+        
+        // Simular funcionalidad de cancelar tutoría
+        document.querySelectorAll('.btn-outline-custom').forEach(button => {
+            if (button.textContent.includes('Cancelar')) {
+                button.addEventListener('click', function() {
+                    if (confirm('¿Estás seguro de que quieres cancelar tu inscripción en esta tutoría?')) {
+                        alert('Tu inscripción ha sido cancelada');
+                        // En una implementación real, aquí se eliminaría la tutoría de la lista
+                        const row = this.closest('tr');
+                        row.remove();
+                    }
+                });
+            }
+        });
+        
+        // Funcionalidad para aceptar/rechazar invitaciones
+        document.querySelectorAll('.btn-success').forEach(button => {
+            if (button.textContent.includes('Aceptar')) {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const tutoria = row.cells[0].textContent;
+                    const tutor = row.cells[1].textContent;
+                    
+                    if (confirm(`¿Aceptar la invitación para "${tutoria}" con ${tutor}?`)) {
+                        alert('Invitación aceptada. Has sido agregado a la tutoría.');
+                        row.remove();
+                    }
+                });
+            }
+        });
+        
+        document.querySelectorAll('.btn-danger').forEach(button => {
+            if (button.textContent.includes('Rechazar')) {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const tutoria = row.cells[0].textContent;
+                    const tutor = row.cells[1].textContent;
+                    
+                    if (confirm(`¿Rechazar la invitación para "${tutoria}" con ${tutor}?`)) {
+                        alert('Invitación rechazada.');
+                        row.remove();
+                    }
+                });
+            }
+        });
+        
+        // Inicializar popovers de Bootstrap
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
     </script>
 </body>
 </html>

@@ -8,21 +8,31 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
+=======
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
 
 class AuthController extends Controller
 {
     public function showLanding()
     {
+<<<<<<< HEAD
         // Usa Auth::check() en lugar de session('user')
         if (Auth::check()) {
             $user = Auth::user();
+=======
+        // Si ya está logueado, redirigir según su rol
+        if (session('user')) {
+            $user = session('user');
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
             return $this->redirectByRole($user->role);
         }
         
         return view('landingpage');
     }
 
+<<<<<<< HEAD
     public function showLogin()
     {
         // Usa Auth::check() en lugar de session('user')
@@ -34,10 +44,16 @@ class AuthController extends Controller
         return view('landingpage')->with('showAuth', 'login');
     }
 
+=======
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
     public function register(Request $request)
     {
         Log::info('Datos recibidos en registro:', $request->all());
 
+<<<<<<< HEAD
+=======
+        // Validación inmediata de contraseña simple primero
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
         if (strlen($request->password) < 8) {
             Log::info('Validación fallida: contraseña muy corta');
             return redirect()->back()
@@ -79,6 +95,11 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
                 'activo' => 1,
+<<<<<<< HEAD
+=======
+                'created_at' => now(),
+                'updated_at' => now()
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
             ]);
 
             Log::info('Usuario creado exitosamente:', ['id' => $user->id, 'email' => $user->email]);
@@ -113,6 +134,13 @@ class AuthController extends Controller
                 ->with('showAuth', 'login');
         }
 
+<<<<<<< HEAD
+=======
+        // DEBUG: Ver todos los usuarios en la base de datos
+        $allUsers = User::all();
+        Log::info('Todos los usuarios en la BD:', $allUsers->toArray());
+
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
         $user = User::where('email', $request->email)
                     ->where('activo', 1) 
                     ->first();
@@ -136,9 +164,13 @@ class AuthController extends Controller
         }
 
         Log::info('Login exitoso:', ['user_id' => $user->id]);
+<<<<<<< HEAD
         
         // Usa Auth::login() en lugar de session()
         Auth::login($user);
+=======
+        session(['user' => $user]);
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
 
         // Redirigir según el rol
         return $this->redirectByRole($user->role);
@@ -146,8 +178,12 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+<<<<<<< HEAD
         // Usa Auth::logout() en lugar de limpiar sesión manualmente
         Auth::logout();
+=======
+        // Limpiar sesión
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
