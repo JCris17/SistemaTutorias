@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+<<<<<<< HEAD
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -10,6 +11,13 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+=======
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    use HasFactory;
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
 
     protected $fillable = [
         'name',
@@ -28,6 +36,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'activo' => 'boolean',
     ];
+<<<<<<< HEAD
     public function tutoriasComoTutor()
 {
     return $this->hasMany(Tutoria::class, 'id_tutor');
@@ -81,4 +90,9 @@ public function solicitudesTutor()
     {
         return $this->role === 'tutor';
     } */
+=======
+
+    // Si no usas timestamps automáticos, descomenta esto:
+    // public $timestamps = true;
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
 }

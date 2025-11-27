@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Tutoria extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
     
     protected $table = 'tutorias';
+=======
+
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
     protected $fillable = [
         'id_estudiante',
         'id_tutor',
@@ -17,6 +21,7 @@ class Tutoria extends Model
         'fecha',
         'hora_inicio',
         'hora_fin',
+<<<<<<< HEAD
         'observaciones',
         'estado',
         'modalidad',
@@ -27,10 +32,16 @@ class Tutoria extends Model
     ];
 
     // Relación con el estudiante (para compatibilidad con el sistema anterior)
+=======
+        'observaciones'
+    ];
+
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
     public function estudiante() {
         return $this->belongsTo(User::class, 'id_estudiante');
     }
 
+<<<<<<< HEAD
     // Relación con el tutor
     public function tutor() {
         return $this->belongsTo(User::class, 'id_tutor');
@@ -85,3 +96,9 @@ public function estudiantes()
         return $inscripcion ? $inscripcion->pivot->estado : null;
     } */
 }
+=======
+    public function tutor() {
+        return $this->belongsTo(User::class, 'id_tutor');
+    }
+}
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3

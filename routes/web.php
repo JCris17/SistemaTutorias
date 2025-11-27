@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -64,17 +65,65 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/estudiante/recursos/{id}/download', [EstudianteController::class, 'downloadRecurso'])->name('estudiante.recursos.download');
     });
     // Rutas para COORDINADOR
+<<<<<<< HEAD
     Route::middleware(['role:coordinador'])->group(function () {
         Route::get('/coordinador', [CoordinadorController::class, 'dashboard'])->name('coordinador');
         Route::get('/coordinador/dashboard', [CoordinadorController::class, 'dashboard'])->name('coordinador.dashboard');
         Route::get('/coordinador/tutorias/{id}/estudiantes', [CoordinadorController::class, 'obtenerEstudiantesTutoria'])->name('coordinador.tutorias.estudiantes');
         Route::get('/coordinador/reportes', [CoordinadorController::class, 'reportes'])->name('coordinador.reportes');
+=======
+Route::middleware(['role:coordinador'])->group(function () {
+    Route::get('/coordinador', [CoordinadorController::class, 'dashboard'])->name('coordinador');
+    Route::get('/coordinador/dashboard', [CoordinadorController::class, 'dashboard'])->name('coordinador.dashboard');
+Route::get('/coordinador/tutorias/{id}/estudiantes', [CoordinadorController::class, 'obtenerEstudiantesTutoria'])->name('coordinador.tutorias.estudiantes');
+Route::get('/coordinador/reportes', [CoordinadorController::class, 'reportes'])->name('coordinador.reportes');
+=======
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TutoriaController;
+use App\Http\Controllers\UserController;
+
+// Rutas públicas
+Route::get('/', [AuthController::class, 'showLanding'])->name('landingpage');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Rutas protegidas
+Route::middleware(['auth.session'])->group(function () {
+    
+    // Solo para TUTOR
+    Route::middleware(['role:tutor'])->group(function () {
+        Route::get('/tutor', function () {
+            return view('tutor');
+        })->name('tutor');
+        
+        Route::get('/tutorias', [TutoriaController::class, 'index'])->name('tutorias.index');
+    });
+
+    // Solo para ESTUDIANTE
+    Route::middleware(['role:estudiante'])->group(function () {
+        Route::get('/estudiante', function () {
+            return view('estudiante');
+        })->name('estudiante');
+    });
+
+    // Solo para COORDINADOR
+    Route::middleware(['role:coordinador'])->group(function () {
+        Route::get('/coordinador', function () {
+            return view('coordinador');
+        })->name('coordinador');
+        
+        // Gestión de usuarios (solo coordinador)
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
+>>>>>>> 2991380dec6648461d490936fe6b2ec1fbae4891
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
         Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
         Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+<<<<<<< HEAD
         // Gestión de tutorías
         Route::get('/coordinador/tutorias', [CoordinadorController::class, 'gestionTutorias'])->name('coordinador.tutorias');
         Route::post('/coordinador/tutorias', [CoordinadorController::class, 'crearTutoria'])->name('coordinador.tutorias.crear');
@@ -95,6 +144,29 @@ Route::middleware(['auth'])->group(function () {
         
         // Reportes
         Route::post('/coordinador/reportes', [CoordinadorController::class, 'generarReportes'])->name('coordinador.reportes.generar');
+=======
+<<<<<<< HEAD
+         // Gestión de tutorías
+    Route::get('/coordinador/tutorias', [CoordinadorController::class, 'gestionTutorias'])->name('coordinador.tutorias');
+    Route::post('/coordinador/tutorias', [CoordinadorController::class, 'crearTutoria'])->name('coordinador.tutorias.crear');
+    Route::put('/coordinador/tutorias/{id}', [CoordinadorController::class, 'actualizarTutoria'])->name('coordinador.tutorias.actualizar');
+    Route::delete('/coordinador/tutorias/{id}', [CoordinadorController::class, 'eliminarTutoria'])->name('coordinador.tutorias.eliminar');
+    
+    // Gestión de estudiantes
+    Route::get('/coordinador/estudiantes', [CoordinadorController::class, 'gestionEstudiantes'])->name('coordinador.estudiantes');
+    Route::post('/coordinador/estudiantes', [CoordinadorController::class, 'crearEstudiante'])->name('coordinador.estudiantes.crear');
+    
+    // Gestión de tutores
+    Route::get('/coordinador/tutores', [CoordinadorController::class, 'gestionTutores'])->name('coordinador.tutores');
+    Route::post('/coordinador/tutores', [CoordinadorController::class, 'crearTutor'])->name('coordinador.tutores.crear');
+    
+    // Control de asistencia
+    Route::get('/coordinador/asistencia', [CoordinadorController::class, 'controlAsistencia'])->name('coordinador.asistencia');
+    Route::post('/coordinador/asistencia', [CoordinadorController::class, 'registrarAsistencia'])->name('coordinador.asistencia.registrar');
+    
+    // Reportes
+    Route::post('/coordinador/reportes', [CoordinadorController::class, 'generarReportes'])->name('coordinador.reportes.generar');
+>>>>>>> 2991380dec6648461d490936fe6b2ec1fbae4891
     });
         Route::post('/recursos', [TutorController::class, 'subirRecurso'])->name('recursos.store');
         Route::get('/recursos/{id}/download', [TutorController::class, 'downloadRecurso'])->name('recursos.download');  
@@ -102,6 +174,13 @@ Route::middleware(['auth'])->group(function () {
     // Ruta común para dashboard
     Route::get('/dashboard', function () {
         $user = Auth::user();
+=======
+    });
+
+    // Rutas comunes para todos los usuarios autenticados
+    Route::get('/dashboard', function () {
+        $user = session('user');
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
         return view('dashboard', compact('user'));
     })->name('dashboard');
 });

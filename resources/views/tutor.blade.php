@@ -337,6 +337,7 @@
     </style>
 </head>
 <body>
+<<<<<<< HEAD
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
             {{ session('success') }}
@@ -351,6 +352,8 @@
         </div>
     @endif
 
+=======
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
@@ -407,11 +410,19 @@
                         <div class="small text-muted">Tutor - Matemáticas</div>
                     </div>
                     <form method="POST" action="{{ route('logout') }}" class="d-inline">
+<<<<<<< HEAD
                         @csrf
                         <button type="submit" class="btn btn-outline-custom ms-3">
                             <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                         </button>
                     </form>
+=======
+    @csrf
+    <button type="submit" class="btn btn-outline-custom ms-3">
+        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+    </button>
+</form>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                 </div>
             </div>
             
@@ -430,8 +441,13 @@
                                 <div class="stats-icon">
                                     <i class="fas fa-chalkboard-teacher"></i>
                                 </div>
+<<<<<<< HEAD
                                 <div class="stats-number">{{ $tutorias_programadas->count() }}</div>
                                 <div class="stats-label">Tutorías Programadas</div>
+=======
+                                <div class="stats-number">5</div>
+                                <div class="stats-label">Tutorías Esta Semana</div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -439,7 +455,11 @@
                                 <div class="stats-icon">
                                     <i class="fas fa-user-graduate"></i>
                                 </div>
+<<<<<<< HEAD
                                 <div class="stats-number">{{ $estudiantes->count() }}</div>
+=======
+                                <div class="stats-number">24</div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 <div class="stats-label">Estudiantes Asignados</div>
                             </div>
                         </div>
@@ -476,11 +496,16 @@
                                                 <tr>
                                                     <th>Tutoría</th>
                                                     <th>Fecha y Hora</th>
+<<<<<<< HEAD
                                                     <th>Estudiante</th>
+=======
+                                                    <th>Estudiantes</th>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+<<<<<<< HEAD
                                                 @foreach($tutorias_programadas->take(3) as $tutoria)
                                                 @php
                                                     $estudiante_nombre = $estudiantes->firstWhere('id', $tutoria->id_estudiante)->name ?? 'Estudiante no encontrado';
@@ -491,11 +516,18 @@
                                                     <td>{{ $tutoria->tema }}</td>
                                                     <td>{{ $fecha_formateada }} {{ $hora_inicio }}</td>
                                                     <td>{{ $estudiante_nombre }}</td>
+=======
+                                                <tr>
+                                                    <td>Matemáticas Avanzadas</td>
+                                                    <td>Hoy, 10:00 AM</td>
+                                                    <td>8</td>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                                     <td>
                                                         <button class="btn btn-sm btn-outline-custom me-1">Preparar</button>
                                                         <button class="btn btn-sm btn-custom">Iniciar</button>
                                                     </td>
                                                 </tr>
+<<<<<<< HEAD
                                                 @endforeach
                                                 
                                                 @if($tutorias_programadas->count() == 0)
@@ -503,6 +535,26 @@
                                                     <td colspan="4" class="text-center">No hay tutorías programadas</td>
                                                 </tr>
                                                 @endif
+=======
+                                                <tr>
+                                                    <td>Cálculo Diferencial</td>
+                                                    <td>Mañana, 2:00 PM</td>
+                                                    <td>6</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-custom me-1">Preparar</button>
+                                                        <button class="btn btn-sm btn-custom" disabled>Iniciar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Álgebra Lineal</td>
+                                                    <td>Viernes, 9:00 AM</td>
+                                                    <td>10</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-custom me-1">Preparar</button>
+                                                        <button class="btn btn-sm btn-custom" disabled>Iniciar</button>
+                                                    </td>
+                                                </tr>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             </tbody>
                                         </table>
                                     </div>
@@ -517,7 +569,11 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-start mb-3">
                                         <div class="flex-shrink-0">
+<<<<<<< HEAD
                                             <input class="form-check-input mt-1" type="checkbox" id="tarea1">
+=======
+                                            <input class="form-check-input mt-1" type="checkbox">
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                         </div>
                                         <div class="flex-grow-1 ms-3">
                                             <p class="mb-1">Preparar material para tutoría de Matemáticas Avanzadas</p>
@@ -526,7 +582,11 @@
                                     </div>
                                     <div class="d-flex align-items-start mb-3">
                                         <div class="flex-shrink-0">
+<<<<<<< HEAD
                                             <input class="form-check-input mt-1" type="checkbox" id="tarea2">
+=======
+                                            <input class="form-check-input mt-1" type="checkbox">
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                         </div>
                                         <div class="flex-grow-1 ms-3">
                                             <p class="mb-1">Revisar ejercicios de Álgebra Lineal</p>
@@ -535,7 +595,11 @@
                                     </div>
                                     <div class="d-flex align-items-start">
                                         <div class="flex-shrink-0">
+<<<<<<< HEAD
                                             <input class="form-check-input mt-1" type="checkbox" id="tarea3" checked>
+=======
+                                            <input class="form-check-input mt-1" type="checkbox" checked>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                         </div>
                                         <div class="flex-grow-1 ms-3">
                                             <p class="mb-1 text-decoration-line-through">Enviar recordatorio a estudiantes</p>
@@ -585,7 +649,11 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <span><i class="fas fa-list me-2"></i>Mis Tutorías Programadas</span>
                             <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#solicitarTutoriaModal">
+<<<<<<< HEAD
                                 <i class="fas fa-plus me-1"></i> Programar Nueva Tutoría
+=======
+                                <i class="fas fa-plus me-1"></i> Solicitar Nueva Tutoría
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                             </button>
                         </div>
                         <div class="card-body">
@@ -593,15 +661,24 @@
                                 <table class="table table-hover table-custom">
                                     <thead>
                                         <tr>
+<<<<<<< HEAD
                                             <th>Tema</th>
                                             <th>Estudiante</th>
                                             <th>Fecha y Hora</th>
                                             <th>Modalidad</th>
                                             <th>Duración</th>
+=======
+                                            <th>Nombre</th>
+                                            <th>Fecha y Hora</th>
+                                            <th>Estudiantes</th>
+                                            <th>Modalidad</th>
+                                            <th>Estado</th>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+<<<<<<< HEAD
                                         @foreach($tutorias_programadas as $tutoria)
                                         @php
                                             $estudiante_nombre = $estudiantes->firstWhere('id', $tutoria->id_estudiante)->name ?? 'Estudiante no encontrado';
@@ -656,6 +733,52 @@
                                             <td colspan='6' class='text-center'>No hay tutorías programadas</td>
                                         </tr>
                                         @endif
+=======
+                                        <tr>
+                                            <td>Matemáticas Avanzadas</td>
+                                            <td>15/11/2025 10:00</td>
+                                            <td>8</td>
+                                            <td>Presencial</td>
+                                            <td><span class="badge badge-custom badge-success">Confirmada</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cálculo Diferencial</td>
+                                            <td>16/11/2025 14:00</td>
+                                            <td>6</td>
+                                            <td>Virtual</td>
+                                            <td><span class="badge badge-custom badge-warning">Pendiente</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Álgebra Lineal</td>
+                                            <td>17/11/2025 09:00</td>
+                                            <td>10</td>
+                                            <td>Mixta</td>
+                                            <td><span class="badge badge-custom badge-success">Confirmada</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Geometría Analítica</td>
+                                            <td>18/11/2025 11:00</td>
+                                            <td>7</td>
+                                            <td>Presencial</td>
+                                            <td><span class="badge badge-custom badge-info">En Espera</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Detalles</button>
+                                                <button class="btn btn-sm btn-outline-custom">Cancelar</button>
+                                            </td>
+                                        </tr>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                     </tbody>
                                 </table>
                             </div>
@@ -671,6 +794,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
+<<<<<<< HEAD
                                             <th>Tema</th>
                                             <th>Estudiante</th>
                                             <th>Fecha</th>
@@ -700,6 +824,45 @@
                                             <td colspan='5' class='text-center'>No hay tutorías pasadas</td>
                                         </tr>
                                         @endif
+=======
+                                            <th>Nombre</th>
+                                            <th>Fecha</th>
+                                            <th>Asistencia</th>
+                                            <th>Material</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Matemáticas Básicas</td>
+                                            <td>10/11/2025</td>
+                                            <td>12/15</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Introducción al Cálculo</td>
+                                            <td>08/11/2025</td>
+                                            <td>10/12</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Estadística Descriptiva</td>
+                                            <td>05/11/2025</td>
+                                            <td>14/16</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom">
+                                                    <i class="fas fa-download"></i> Descargar
+                                                </button>
+                                            </td>
+                                        </tr>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                     </tbody>
                                 </table>
                             </div>
@@ -721,6 +884,7 @@
                                     <i class="fas fa-clipboard-list me-2"></i>Registro de Asistencia
                                 </div>
                                 <div class="card-body">
+<<<<<<< HEAD
                                     <form method="POST" action="{{ route('asistencia.registrar') }}" id="formAsistencia">
                                         @csrf
                                         <div class="mb-3">
@@ -763,6 +927,85 @@
                                             </div>
                                         </div>
                                     </form>
+=======
+                                    <div class="mb-3">
+                                        <label for="selectTutoria" class="form-label">Seleccionar Tutoría</label>
+                                        <select class="form-select" id="selectTutoria">
+                                            <option selected>Seleccione una tutoría...</option>
+                                            <option value="1">Matemáticas Avanzadas - Hoy 10:00 AM</option>
+                                            <option value="2">Cálculo Diferencial - Mañana 2:00 PM</option>
+                                            <option value="3">Álgebra Lineal - Viernes 9:00 AM</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Estudiante</th>
+                                                    <th>Asistencia</th>
+                                                    <th>Observaciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Ana Martínez</td>
+                                                    <td>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia1" id="presente1" checked>
+                                                            <label class="form-check-label" for="presente1">Presente</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia1" id="ausente1">
+                                                            <label class="form-check-label" for="ausente1">Ausente</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control form-control-sm" placeholder="Observaciones...">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Carlos López</td>
+                                                    <td>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia2" id="presente2">
+                                                            <label class="form-check-label" for="presente2">Presente</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia2" id="ausente2" checked>
+                                                            <label class="form-check-label" for="ausente2">Ausente</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control form-control-sm" value="Justificado - Enfermedad">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>María García</td>
+                                                    <td>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia3" id="presente3" checked>
+                                                            <label class="form-check-label" for="presente3">Presente</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="asistencia3" id="ausente3">
+                                                            <label class="form-check-label" for="ausente3">Ausente</label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control form-control-sm" placeholder="Observaciones...">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-custom" id="guardarAsistencia">
+                                            <i class="fas fa-save me-1"></i> Guardar Asistencia
+                                        </button>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                         </div>
@@ -773,23 +1016,41 @@
                                 </div>
                                 <div class="card-body text-center">
                                     <div class="mb-4">
+<<<<<<< HEAD
                                         <h3 class="text-primary" id="porcentajeAsistencia">0%</h3>
+=======
+                                        <h3 class="text-primary">88%</h3>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                         <p class="text-muted">Asistencia General</p>
                                     </div>
                                     <div class="d-flex justify-content-around mb-3">
                                         <div>
+<<<<<<< HEAD
                                             <h5 class="text-success" id="totalPresentes">0</h5>
                                             <small>Presentes</small>
                                         </div>
                                         <div>
                                             <h5 class="text-danger" id="totalAusentes">0</h5>
+=======
+                                            <h5 class="text-success">21</h5>
+                                            <small>Presentes</small>
+                                        </div>
+                                        <div>
+                                            <h5 class="text-danger">3</h5>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             <small>Ausentes</small>
                                         </div>
                                     </div>
                                     <div class="progress mb-3" style="height: 10px;">
+<<<<<<< HEAD
                                         <div class="progress-bar bg-success" id="barraProgreso" style="width: 0%"></div>
                                     </div>
                                     <small class="text-muted" id="infoTutoria">Seleccione una tutoría</small>
+=======
+                                        <div class="progress-bar bg-success" style="width: 88%"></div>
+                                    </div>
+                                    <small class="text-muted">Última tutoría: Matemáticas Básicas</small>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                             
@@ -797,7 +1058,9 @@
                                 <div class="card-header">
                                     <i class="fas fa-history me-2"></i>Historial Reciente
                                 </div>
+<<<<<<< HEAD
                                 <div class="card-body" id="historialAsistencia">
+<<<<<<< HEAD
                                     @if($asistencias_recientes->count() > 0)
                                         @foreach($asistencias_recientes as $asistencia)
                                         <div class="mb-3">
@@ -815,6 +1078,34 @@
                                             <small>No hay historial reciente</small>
                                         </div>
                                     @endif
+=======
+                                    <div class="text-center text-muted">
+                                        <small>No hay historial reciente</small>
+=======
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Matemáticas Básicas</span>
+                                            <span class="badge badge-custom badge-success">80%</span>
+                                        </div>
+                                        <small class="text-muted">10 Nov 2025</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Introducción al Cálculo</span>
+                                            <span class="badge badge-custom badge-warning">83%</span>
+                                        </div>
+                                        <small class="text-muted">8 Nov 2025</small>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Estadística Descriptiva</span>
+                                            <span class="badge badge-custom badge-success">88%</span>
+                                        </div>
+                                        <small class="text-muted">5 Nov 2025</small>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
+                                    </div>
+>>>>>>> 2991380dec6648461d490936fe6b2ec1fbae4891
                                 </div>
                             </div>
                         </div>
@@ -836,19 +1127,32 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-4">
+<<<<<<< HEAD
                                         <h4 id="mesActual">Noviembre 2025</h4>
                                         <div>
                                             <button class="btn btn-outline-custom me-2" id="btnMesAnterior">
                                                 <i class="fas fa-chevron-left"></i>
                                             </button>
                                             <button class="btn btn-outline-custom" id="btnMesSiguiente">
+=======
+                                        <h4>Noviembre 2025</h4>
+                                        <div>
+                                            <button class="btn btn-outline-custom me-2">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </button>
+                                            <button class="btn btn-outline-custom">
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                                 <i class="fas fa-chevron-right"></i>
                                             </button>
                                         </div>
                                     </div>
                                     
                                     <div class="table-responsive">
+<<<<<<< HEAD
                                         <table class="table table-bordered text-center" id="calendario">
+=======
+                                        <table class="table table-bordered text-center">
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             <thead>
                                                 <tr>
                                                     <th>Lun</th>
@@ -860,8 +1164,63 @@
                                                     <th>Dom</th>
                                                 </tr>
                                             </thead>
+<<<<<<< HEAD
                                             <tbody id="cuerpoCalendario">
                                                 <!-- El calendario se generará dinámicamente -->
+=======
+                                            <tbody>
+                                                <tr>
+                                                    <td class="calendar-day">27<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">28<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">29<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">30<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">31<br><small class="text-muted">Oct</small></td>
+                                                    <td class="calendar-day">1</td>
+                                                    <td class="calendar-day">2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="calendar-day">3</td>
+                                                    <td class="calendar-day">4</td>
+                                                    <td class="calendar-day">5</td>
+                                                    <td class="calendar-day">6</td>
+                                                    <td class="calendar-day">7</td>
+                                                    <td class="calendar-day">8</td>
+                                                    <td class="calendar-day">9</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="calendar-day">10</td>
+                                                    <td class="calendar-day">11</td>
+                                                    <td class="calendar-day">12</td>
+                                                    <td class="calendar-day">13</td>
+                                                    <td class="calendar-day">14</td>
+                                                    <td class="calendar-day">15</td>
+                                                    <td class="calendar-day today">16<br>
+                                                        <div class="calendar-event">Matemáticas 10:00</div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="calendar-day">17<br>
+                                                        <div class="calendar-event">Álgebra 9:00</div>
+                                                    </td>
+                                                    <td class="calendar-day">18<br>
+                                                        <div class="calendar-event">Geometría 11:00</div>
+                                                    </td>
+                                                    <td class="calendar-day">19</td>
+                                                    <td class="calendar-day">20</td>
+                                                    <td class="calendar-day">21</td>
+                                                    <td class="calendar-day">22</td>
+                                                    <td class="calendar-day">23</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="calendar-day">24</td>
+                                                    <td class="calendar-day">25</td>
+                                                    <td class="calendar-day">26</td>
+                                                    <td class="calendar-day">27</td>
+                                                    <td class="calendar-day">28</td>
+                                                    <td class="calendar-day">29</td>
+                                                    <td class="calendar-day">30</td>
+                                                </tr>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                             </tbody>
                                         </table>
                                     </div>
@@ -874,6 +1233,7 @@
                                     <i class="fas fa-clock me-2"></i>Mi Disponibilidad
                                 </div>
                                 <div class="card-body">
+<<<<<<< HEAD
                                     <form method="POST" action="{{ route('horario.update') }}" id="formHorario">
                                         @csrf
                                         <div class="mb-3">
@@ -908,6 +1268,39 @@
                                             </button>
                                         </div>
                                     </form>
+=======
+                                    <div class="mb-3">
+                                        <h5>Horario Semanal</h5>
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Lunes
+                                                <span class="badge badge-custom badge-info">9:00 - 13:00</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Martes
+                                                <span class="badge badge-custom badge-info">14:00 - 18:00</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Miércoles
+                                                <span class="badge badge-custom badge-info">9:00 - 13:00</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Jueves
+                                                <span class="badge badge-custom badge-info">14:00 - 18:00</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Viernes
+                                                <span class="badge badge-custom badge-info">9:00 - 12:00</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="d-grid">
+                                        <button class="btn btn-outline-custom" data-bs-toggle="modal" data-bs-target="#editarHorarioModal">
+                                            <i class="fas fa-edit me-1"></i> Editar Disponibilidad
+                                        </button>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                             
@@ -915,6 +1308,7 @@
                                 <div class="card-header">
                                     <i class="fas fa-list me-2"></i>Próximas Tutorías
                                 </div>
+<<<<<<< HEAD
                                 <div class="card-body" id="proximasTutorias">
                                     @foreach($tutorias_programadas->take(3) as $tutoria)
                                     @php
@@ -935,6 +1329,30 @@
                                         <small>No hay tutorías programadas</small>
                                     </div>
                                     @endif
+=======
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <h6>Hoy</h6>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Matemáticas Avanzadas</span>
+                                            <small class="text-muted">10:00</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <h6>Mañana</h6>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Cálculo Diferencial</span>
+                                            <small class="text-muted">14:00</small>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h6>Viernes</h6>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Álgebra Lineal</span>
+                                            <small class="text-muted">9:00</small>
+                                        </div>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                         </div>
@@ -965,6 +1383,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+<<<<<<< HEAD
                                         @foreach($estudiantes as $estudiante)
                                         @php
                                             $porcentajeAsistencia = rand(70, 100);
@@ -997,6 +1416,48 @@
                                             <td colspan="5" class="text-center">No hay estudiantes asignados</td>
                                         </tr>
                                         @endif
+=======
+                                        <tr>
+                                            <td>Ana Martínez</td>
+                                            <td>ana.martinez@est.univalle.edu</td>
+                                            <td>92%</td>
+                                            <td>10/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Contactar</button>
+                                                <button class="btn btn-sm btn-outline-custom">Ver Progreso</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Carlos López</td>
+                                            <td>carlos.lopez@est.univalle.edu</td>
+                                            <td>75%</td>
+                                            <td>08/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Contactar</button>
+                                                <button class="btn btn-sm btn-outline-custom">Ver Progreso</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>María García</td>
+                                            <td>maria.garcia@est.univalle.edu</td>
+                                            <td>100%</td>
+                                            <td>10/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Contactar</button>
+                                                <button class="btn btn-sm btn-outline-custom">Ver Progreso</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>José Fernández</td>
+                                            <td>jose.fernandez@est.univalle.edu</td>
+                                            <td>83%</td>
+                                            <td>08/11/2025</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-custom me-1">Contactar</button>
+                                                <button class="btn btn-sm btn-outline-custom">Ver Progreso</button>
+                                            </td>
+                                        </tr>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                     </tbody>
                                 </table>
                             </div>
@@ -1045,6 +1506,7 @@
                                 <div class="card-header">
                                     <i class="fas fa-comments me-2"></i>Comentarios Recientes
                                 </div>
+<<<<<<< HEAD
                                 <div class="card-body" id="comentariosEstudiantes">
                                     @foreach($estudiantes->take(3) as $estudiante)
                                     <div class="mb-3">
@@ -1052,6 +1514,21 @@
                                         <small class="text-muted">- {{ $estudiante->name }}, {{ \Carbon\Carbon::now()->subDays(rand(1, 10))->format('d/m/Y') }}</small>
                                     </div>
                                     @endforeach
+=======
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <p class="mb-1">"Excelente explicación sobre derivadas parciales"</p>
+                                        <small class="text-muted">- Ana Martínez, 10/11/2025</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <p class="mb-1">"Los ejercicios prácticos fueron muy útiles"</p>
+                                        <small class="text-muted">- Carlos López, 08/11/2025</small>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1">"Material muy claro y bien organizado"</p>
+                                        <small class="text-muted">- María García, 05/11/2025</small>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                 </div>
                             </div>
                         </div>
@@ -1073,7 +1550,9 @@
                             </button>
                         </div>
                         <div class="card-body">
+<<<<<<< HEAD
                             <div class="row" id="listaRecursos">
+<<<<<<< HEAD
                                 @if($recursos->count() > 0)
                                     @foreach($recursos as $recurso)
                                     <div class="col-md-4 mb-4">
@@ -1111,6 +1590,62 @@
                                         <p class="text-muted">No hay recursos subidos aún</p>
                                     </div>
                                 @endif
+=======
+                                <!-- Los recursos se cargarán dinámicamente -->
+                                <div class="col-12 text-center">
+                                    <p class="text-muted">No hay recursos subidos aún</p>
+=======
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-file-pdf fa-3x text-danger mb-3"></i>
+                                            <h5>Guía de Matemáticas</h5>
+                                            <p class="text-muted">PDF - 2.4 MB</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-custom btn-sm">Descargar</button>
+                                                <button class="btn btn-outline-custom btn-sm">Compartir</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            Subido: 05/11/2025
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-file-excel fa-3x text-success mb-3"></i>
+                                            <h5>Ejercicios de Cálculo</h5>
+                                            <p class="text-muted">XLSX - 1.8 MB</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-custom btn-sm">Descargar</button>
+                                                <button class="btn btn-outline-custom btn-sm">Compartir</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            Subido: 03/11/2025
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-file-video fa-3x text-primary mb-3"></i>
+                                            <h5>Video - Álgebra Lineal</h5>
+                                            <p class="text-muted">MP4 - 15.2 MB</p>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-outline-custom btn-sm">Ver</button>
+                                                <button class="btn btn-outline-custom btn-sm">Compartir</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-muted">
+                                            Subido: 01/11/2025
+                                        </div>
+                                    </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
+                                </div>
+>>>>>>> 2991380dec6648461d490936fe6b2ec1fbae4891
                             </div>
                         </div>
                     </div>
@@ -1121,6 +1656,7 @@
                         </div>
                         <div class="card-body">
                             <div class="list-group">
+<<<<<<< HEAD
                                 <a href="https://www.khanacademy.org/math" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                                     Khan Academy - Matemáticas
                                     <i class="fas fa-external-link-alt"></i>
@@ -1130,6 +1666,17 @@
                                     <i class="fas fa-external-link-alt"></i>
                                 </a>
                                 <a href="https://www.geogebra.org/" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+=======
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Khan Academy - Matemáticas
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    Wolfram Alpha - Calculadora
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                                     GeoGebra - Geometría Interactiva
                                     <i class="fas fa-external-link-alt"></i>
                                 </a>
@@ -1141,11 +1688,16 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <!-- Modal para Programar Tutoría -->
+=======
+    <!-- Modal para Solicitar Tutoría -->
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
     <div class="modal fade" id="solicitarTutoriaModal" tabindex="-1" aria-labelledby="solicitarTutoriaModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+<<<<<<< HEAD
                     <h5 class="modal-title" id="solicitarTutoriaModalLabel">Programar Nueva Tutoría</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -1201,10 +1753,48 @@
                         <button type="submit" class="btn btn-custom">Programar Tutoría</button>
                     </div>
                 </form>
+=======
+                    <h5 class="modal-title" id="solicitarTutoriaModalLabel">Solicitar Nueva Tutoría</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="materiaTutoria" class="form-label">Materia</label>
+                            <input type="text" class="form-control" id="materiaTutoria" placeholder="Ej: Matemáticas Avanzadas">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fechaTutoria" class="form-label">Fecha Preferida</label>
+                            <input type="date" class="form-control" id="fechaTutoria">
+                        </div>
+                        <div class="mb-3">
+                            <label for="horaTutoria" class="form-label">Hora Preferida</label>
+                            <input type="time" class="form-control" id="horaTutoria">
+                        </div>
+                        <div class="mb-3">
+                            <label for="modalidadTutoria" class="form-label">Modalidad</label>
+                            <select class="form-select" id="modalidadTutoria">
+                                <option value="presencial">Presencial</option>
+                                <option value="virtual">Virtual</option>
+                                <option value="mixta">Mixta</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcionTutoria" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcionTutoria" rows="3" placeholder="Describa los temas a tratar..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-custom">Enviar Solicitud</button>
+                </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
             </div>
         </div>
     </div>
 
+<<<<<<< HEAD
     <!-- Modal para Editar Tutoría -->
     <div class="modal fade" id="editarTutoriaModal" tabindex="-1" aria-labelledby="editarTutoriaModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -1267,6 +1857,64 @@
                         <button type="submit" class="btn btn-custom">Actualizar Tutoría</button>
                     </div>
                 </form>
+=======
+    <!-- Modal para Editar Horario -->
+    <div class="modal fade" id="editarHorarioModal" tabindex="-1" aria-labelledby="editarHorarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarHorarioModalLabel">Editar Mi Disponibilidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Lunes</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="09:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="13:00">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Martes</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="14:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="18:00">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Miércoles</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="09:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="13:00">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Jueves</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="14:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="18:00">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Viernes</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="09:00">
+                                <span class="input-group-text">a</span>
+                                <input type="time" class="form-control" value="12:00">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-custom">Guardar Cambios</button>
+                </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
             </div>
         </div>
     </div>
@@ -1279,8 +1927,13 @@
                     <h5 class="modal-title" id="subirRecursoModalLabel">Subir Nuevo Recurso</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+<<<<<<< HEAD
                 <form method="POST" action="{{ route('recursos.store') }}" enctype="multipart/form-data" id="formSubirRecurso">
                     @csrf
+=======
+<<<<<<< HEAD
+                <form id="formSubirRecurso">
+>>>>>>> 2991380dec6648461d490936fe6b2ec1fbae4891
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="nombreRecurso" class="form-label">Nombre del Recurso</label>
@@ -1288,13 +1941,29 @@
                         </div>
                         <div class="mb-3">
                             <label for="tipoRecurso" class="form-label">Tipo de Recurso</label>
+<<<<<<< HEAD
                             <select class="form-select" id="tipoRecurso" name="tipo" required>
+=======
+                            <select class="form-select" id="tipoRecurso" required>
+=======
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombreRecurso" class="form-label">Nombre del Recurso</label>
+                            <input type="text" class="form-control" id="nombreRecurso" placeholder="Ej: Guía de Ejercicios">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipoRecurso" class="form-label">Tipo de Recurso</label>
+                            <select class="form-select" id="tipoRecurso">
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
+>>>>>>> 2991380dec6648461d490936fe6b2ec1fbae4891
                                 <option value="documento">Documento</option>
                                 <option value="presentacion">Presentación</option>
                                 <option value="video">Video</option>
                                 <option value="enlace">Enlace</option>
                             </select>
                         </div>
+<<<<<<< HEAD
                         <div class="mb-3" id="campoArchivo">
                             <label for="archivoRecurso" class="form-label">Archivo</label>
                             <input class="form-control" type="file" id="archivoRecurso" name="archivo">
@@ -1303,16 +1972,31 @@
                             <label for="enlaceRecurso" class="form-label">Enlace</label>
                             <input type="url" class="form-control" id="enlaceRecurso" name="enlace" placeholder="https://...">
                         </div>
+=======
+                        <div class="mb-3">
+                            <label for="archivoRecurso" class="form-label">Archivo</label>
+                            <input class="form-control" type="file" id="archivoRecurso">
+                        </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
                         <div class="mb-3">
                             <label for="descripcionRecurso" class="form-label">Descripción</label>
                             <textarea class="form-control" id="descripcionRecurso" name="descripcion" rows="3" placeholder="Descripción del recurso..."></textarea>
                         </div>
+<<<<<<< HEAD
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-custom">Subir Recurso</button>
                     </div>
                 </form>
+=======
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-custom">Subir Recurso</button>
+                </div>
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
             </div>
         </div>
     </div>
@@ -1365,6 +2049,7 @@
                 document.getElementById('current-page-title').textContent = pageTitle;
             });
         });
+<<<<<<< HEAD
 
         // Configurar modal de editar tutoría
         const editarTutoriaModal = document.getElementById('editarTutoriaModal');
@@ -1650,6 +2335,64 @@
                 bsAlert.close();
             });
         }, 5000);
+<<<<<<< HEAD
+=======
+
+        // Simular envío de formularios
+        document.getElementById('formAsistencia')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Asistencia registrada correctamente');
+            // Aquí iría la lógica real de envío del formulario
+        });
+        
+        document.getElementById('formHorario')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Horario actualizado correctamente');
+            // Aquí iría la lógica real de envío del formulario
+=======
+        
+        // Simular funcionalidad de guardar asistencia
+        document.getElementById('guardarAsistencia').addEventListener('click', function() {
+            alert('Asistencia guardada correctamente');
+        });
+        
+        // Simular funcionalidad de subir recurso
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            if (button.textContent.includes('Subir Recurso')) {
+                button.addEventListener('click', function() {
+                    alert('Recurso subido correctamente');
+                    // Cerrar el modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('subirRecursoModal'));
+                    modal.hide();
+                });
+            }
+        });
+        
+        // Simular funcionalidad de solicitar tutoría
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            if (button.textContent.includes('Enviar Solicitud')) {
+                button.addEventListener('click', function() {
+                    alert('Solicitud de tutoría enviada correctamente');
+                    // Cerrar el modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('solicitarTutoriaModal'));
+                    modal.hide();
+                });
+            }
+        });
+        
+        // Simular funcionalidad de editar horario
+        document.querySelectorAll('.btn-custom').forEach(button => {
+            if (button.textContent.includes('Guardar Cambios')) {
+                button.addEventListener('click', function() {
+                    alert('Horario actualizado correctamente');
+                    // Cerrar el modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editarHorarioModal'));
+                    modal.hide();
+                });
+            }
+>>>>>>> 41fa91920f3bd0f30fb2388e248023ec6ef7c5d3
+        });
+>>>>>>> 2991380dec6648461d490936fe6b2ec1fbae4891
     </script>
 </body>
 </html>
