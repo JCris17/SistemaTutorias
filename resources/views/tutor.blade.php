@@ -596,6 +596,7 @@
                                             <th>Tema</th>
                                             <th>Estudiante</th>
                                             <th>Fecha y Hora</th>
+                                            <th>Modalidad</th>
                                             <th>Duración</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -616,6 +617,15 @@
                                             <td>{{ $tutoria->tema }}</td>
                                             <td>{{ $estudiante_nombre }}</td>
                                             <td>{{ $fecha_formateada }} {{ $hora_inicio }}</td>
+                                            <td>
+                                                @if($tutoria->modalidad == 'presencial')
+                                                    <span class="badge badge-custom badge-success">Presencial</span>
+                                                @elseif($tutoria->modalidad == 'virtual')
+                                                    <span class="badge badge-custom badge-info">Virtual</span>
+                                                @else
+                                                    <span class="badge badge-custom badge-warning">Ambas</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $duracion_texto }}</td>
                                             <td class='user-actions'>
                                                 <button class='btn btn-sm btn-outline-custom me-1' data-bs-toggle='modal' data-bs-target='#editarTutoriaModal' 
@@ -625,6 +635,7 @@
                                                         data-fecha='{{ $tutoria->fecha }}' 
                                                         data-hora_inicio='{{ $tutoria->hora_inicio }}' 
                                                         data-hora_fin='{{ $tutoria->hora_fin }}' 
+                                                        data-modalidad='{{ $tutoria->modalidad }}'
                                                         data-observaciones='{{ $tutoria->observaciones }}'>
                                                     <i class='fas fa-edit'></i> Editar
                                                 </button>
@@ -642,7 +653,7 @@
                                         
                                         @if($tutorias_programadas->count() == 0)
                                         <tr>
-                                            <td colspan='5' class='text-center'>No hay tutorías programadas</td>
+                                            <td colspan='6' class='text-center'>No hay tutorías programadas</td>
                                         </tr>
                                         @endif
                                     </tbody>
@@ -720,9 +731,10 @@
                                                     @php
                                                         $fecha_formateada = \Carbon\Carbon::parse($tutoria->fecha)->format('d/m/Y');
                                                         $hora_inicio = \Carbon\Carbon::parse($tutoria->hora_inicio)->format('H:i');
+                                                        $estudiante_nombre = $estudiantes->firstWhere('id', $tutoria->id_estudiante)->name ?? 'Estudiante no encontrado';
                                                     @endphp
-                                                    <option value="{{ $tutoria->id }}">
-                                                        {{ $tutoria->tema }} - {{ $fecha_formateada }} {{ $hora_inicio }}
+                                                    <option value="{{ $tutoria->id }}" data-estudiante-id="{{ $tutoria->id_estudiante }}">
+                                                        {{ $tutoria->tema }} - {{ $estudiante_nombre }} - {{ $fecha_formateada }} {{ $hora_inicio }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -786,9 +798,23 @@
                                     <i class="fas fa-history me-2"></i>Historial Reciente
                                 </div>
                                 <div class="card-body" id="historialAsistencia">
-                                    <div class="text-center text-muted">
-                                        <small>No hay historial reciente</small>
-                                    </div>
+                                    @if($asistencias_recientes->count() > 0)
+                                        @foreach($asistencias_recientes as $asistencia)
+                                        <div class="mb-3">
+                                            <div class="d-flex justify-content-between">
+                                                <span>{{ $asistencia->tutoria->tema ?? 'Tutoría' }}</span>
+                                                <span class="badge badge-custom badge-{{ $asistencia->porcentaje_asistencia >= 80 ? 'success' : ($asistencia->porcentaje_asistencia >= 60 ? 'warning' : 'danger') }}">
+                                                    {{ $asistencia->porcentaje_asistencia }}%
+                                                </span>
+                                            </div>
+                                            <small class="text-muted">{{ \Carbon\Carbon::parse($asistencia->fecha_asistencia)->format('d/m/Y') }}</small>
+                                        </div>
+                                        @endforeach
+                                    @else
+                                        <div class="text-center text-muted">
+                                            <small>No hay historial reciente</small>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -1048,10 +1074,43 @@
                         </div>
                         <div class="card-body">
                             <div class="row" id="listaRecursos">
-                                <!-- Los recursos se cargarán dinámicamente -->
-                                <div class="col-12 text-center">
-                                    <p class="text-muted">No hay recursos subidos aún</p>
-                                </div>
+                                @if($recursos->count() > 0)
+                                    @foreach($recursos as $recurso)
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card h-100">
+                                            <div class="card-body text-center">
+                                                @if($recurso->tipo == 'documento')
+                                                    <i class="fas fa-file-pdf fa-3x text-danger mb-3"></i>
+                                                @elseif($recurso->tipo == 'presentacion')
+                                                    <i class="fas fa-file-powerpoint fa-3x text-warning mb-3"></i>
+                                                @elseif($recurso->tipo == 'video')
+                                                    <i class="fas fa-file-video fa-3x text-primary mb-3"></i>
+                                                @else
+                                                    <i class="fas fa-link fa-3x text-success mb-3"></i>
+                                                @endif
+                                                <h5>{{ $recurso->nombre }}</h5>
+                                                <p class="text-muted">{{ ucfirst($recurso->tipo) }}</p>
+                                                <p class="small">{{ $recurso->descripcion }}</p>
+                                                <div class="d-grid gap-2">
+                                                    @if($recurso->tipo == 'enlace')
+                                                        <a href="{{ $recurso->enlace }}" target="_blank" class="btn btn-outline-custom btn-sm">Abrir Enlace</a>
+                                                    @else
+                                                        <a href="{{ route('recursos.download', $recurso->id) }}" class="btn btn-outline-custom btn-sm">Descargar</a>
+                                                        <button class="btn btn-outline-custom btn-sm btn-preview" data-recurso-id="{{ $recurso->id }}">Previsualizar</button>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="card-footer text-muted">
+                                                Subido: {{ \Carbon\Carbon::parse($recurso->created_at)->format('d/m/Y') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                @else
+                                    <div class="col-12 text-center">
+                                        <p class="text-muted">No hay recursos subidos aún</p>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -1125,6 +1184,14 @@
                             </div>
                         </div>
                         <div class="mb-3">
+                            <label for="modalidad" class="form-label">Modalidad</label>
+                            <select class="form-select" id="modalidad" name="modalidad" required>
+                                <option value="presencial">Presencial</option>
+                                <option value="virtual">Virtual</option>
+                                <option value="ambas">Ambas</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="observaciones" class="form-label">Descripción/Observaciones</label>
                             <textarea class="form-control" id="observaciones" name="observaciones" rows="3" placeholder="Describa los temas a tratar, materiales necesarios, observaciones..."></textarea>
                         </div>
@@ -1183,6 +1250,14 @@
                             </div>
                         </div>
                         <div class="mb-3">
+                            <label for="edit_modalidad" class="form-label">Modalidad</label>
+                            <select class="form-select" id="edit_modalidad" name="modalidad" required>
+                                <option value="presencial">Presencial</option>
+                                <option value="virtual">Virtual</option>
+                                <option value="ambas">Ambas</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="edit_observaciones" class="form-label">Observaciones</label>
                             <textarea class="form-control" id="edit_observaciones" name="observaciones" rows="3"></textarea>
                         </div>
@@ -1204,15 +1279,16 @@
                     <h5 class="modal-title" id="subirRecursoModalLabel">Subir Nuevo Recurso</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="formSubirRecurso">
+                <form method="POST" action="{{ route('recursos.store') }}" enctype="multipart/form-data" id="formSubirRecurso">
+                    @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="nombreRecurso" class="form-label">Nombre del Recurso</label>
-                            <input type="text" class="form-control" id="nombreRecurso" placeholder="Ej: Guía de Ejercicios" required>
+                            <input type="text" class="form-control" id="nombreRecurso" name="nombre" placeholder="Ej: Guía de Ejercicios" required>
                         </div>
                         <div class="mb-3">
                             <label for="tipoRecurso" class="form-label">Tipo de Recurso</label>
-                            <select class="form-select" id="tipoRecurso" required>
+                            <select class="form-select" id="tipoRecurso" name="tipo" required>
                                 <option value="documento">Documento</option>
                                 <option value="presentacion">Presentación</option>
                                 <option value="video">Video</option>
@@ -1221,15 +1297,15 @@
                         </div>
                         <div class="mb-3" id="campoArchivo">
                             <label for="archivoRecurso" class="form-label">Archivo</label>
-                            <input class="form-control" type="file" id="archivoRecurso">
+                            <input class="form-control" type="file" id="archivoRecurso" name="archivo">
                         </div>
                         <div class="mb-3" id="campoEnlace" style="display: none;">
                             <label for="enlaceRecurso" class="form-label">Enlace</label>
-                            <input type="url" class="form-control" id="enlaceRecurso" placeholder="https://...">
+                            <input type="url" class="form-control" id="enlaceRecurso" name="enlace" placeholder="https://...">
                         </div>
                         <div class="mb-3">
                             <label for="descripcionRecurso" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="descripcionRecurso" rows="3" placeholder="Descripción del recurso..."></textarea>
+                            <textarea class="form-control" id="descripcionRecurso" name="descripcion" rows="3" placeholder="Descripción del recurso..."></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -1237,6 +1313,25 @@
                         <button type="submit" class="btn btn-custom">Subir Recurso</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Previsualizar Recurso -->
+    <div class="modal fade" id="previewRecursoModal" tabindex="-1" aria-labelledby="previewRecursoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewRecursoModalLabel">Previsualizar Recurso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" id="previewContent">
+                    <!-- Contenido de previsualización se cargará aquí -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a href="#" class="btn btn-custom" id="downloadPreviewBtn">Descargar</a>
+                </div>
             </div>
         </div>
     </div>
@@ -1284,6 +1379,7 @@
                 document.getElementById('edit_fecha').value = button.getAttribute('data-fecha');
                 document.getElementById('edit_hora_inicio').value = button.getAttribute('data-hora_inicio');
                 document.getElementById('edit_hora_fin').value = button.getAttribute('data-hora_fin');
+                document.getElementById('edit_modalidad').value = button.getAttribute('data-modalidad');
                 document.getElementById('edit_observaciones').value = button.getAttribute('data-observaciones');
                 
                 // Actualizar la acción del formulario
@@ -1310,12 +1406,17 @@
         if (selectTutoria) {
             selectTutoria.addEventListener('change', function() {
                 if (this.value) {
-                    // Simular carga de estudiantes para la tutoría seleccionada
-                    const estudiantes = @json($estudiantes);
-                    const tbody = document.getElementById('tbodyEstudiantes');
-                    tbody.innerHTML = '';
+                    const selectedOption = this.options[this.selectedIndex];
+                    const estudianteId = selectedOption.getAttribute('data-estudiante-id');
                     
-                    estudiantes.forEach(estudiante => {
+                    // Buscar el estudiante correspondiente
+                    const estudiantes = @json($estudiantes);
+                    const estudiante = estudiantes.find(e => e.id == estudianteId);
+                    
+                    if (estudiante) {
+                        const tbody = document.getElementById('tbodyEstudiantes');
+                        tbody.innerHTML = '';
+                        
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
                             <td>${estudiante.name}</td>
@@ -1341,42 +1442,23 @@
                             </td>
                         `;
                         tbody.appendChild(tr);
-                    });
+                    }
                     
                     tablaAsistencia.style.display = 'block';
                     
                     // Actualizar resumen
-                    document.getElementById('porcentajeAsistencia').textContent = '88%';
-                    document.getElementById('totalPresentes').textContent = estudiantes.length - 1;
-                    document.getElementById('totalAusentes').textContent = '1';
-                    document.getElementById('barraProgreso').style.width = '88%';
+                    document.getElementById('porcentajeAsistencia').textContent = '100%';
+                    document.getElementById('totalPresentes').textContent = '1';
+                    document.getElementById('totalAusentes').textContent = '0';
+                    document.getElementById('barraProgreso').style.width = '100%';
                     document.getElementById('infoTutoria').textContent = 'Tutoría seleccionada';
-                    
-                    // Simular historial
-                    const historial = document.getElementById('historialAsistencia');
-                    historial.innerHTML = `
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between">
-                                <span>Matemáticas Básicas</span>
-                                <span class="badge badge-custom badge-success">80%</span>
-                            </div>
-                            <small class="text-muted">10 Nov 2025</small>
-                        </div>
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between">
-                                <span>Introducción al Cálculo</span>
-                                <span class="badge badge-custom badge-warning">83%</span>
-                            </div>
-                            <small class="text-muted">8 Nov 2025</small>
-                        </div>
-                    `;
                 } else {
                     tablaAsistencia.style.display = 'none';
                 }
             });
         }
 
-        // Funcionalidad del calendario
+        // Funcionalidad del calendario con tutorías reales
         let fechaActual = new Date();
         
         function generarCalendario() {
@@ -1394,6 +1476,12 @@
             
             const cuerpo = document.getElementById('cuerpoCalendario');
             cuerpo.innerHTML = '';
+            
+            // Obtener tutorías del mes actual
+            const tutoriasDelMes = @json($tutorias_programadas).filter(tutoria => {
+                const fechaTutoria = new Date(tutoria.fecha);
+                return fechaTutoria.getMonth() === mes && fechaTutoria.getFullYear() === año;
+            });
             
             let fecha = 1;
             for (let i = 0; i < 6; i++) {
@@ -1418,12 +1506,23 @@
                             celda.classList.add('today');
                         }
                         
-                        // Simular eventos de tutorías
-                        if (fecha % 5 === 0 || fecha % 7 === 0) {
-                            celda.innerHTML = `${fecha}<br><div class="calendar-event">Tutoría 10:00</div>`;
-                        } else {
-                            celda.innerHTML = fecha;
-                        }
+                        // Mostrar tutorías para este día
+                        const tutoriasDelDia = tutoriasDelMes.filter(tutoria => {
+                            const fechaTutoria = new Date(tutoria.fecha);
+                            return fechaTutoria.getDate() === fecha;
+                        });
+                        
+                        let contenido = `${fecha}`;
+                        
+                        tutoriasDelDia.forEach(tutoria => {
+                            const hora = new Date(`1970-01-01T${tutoria.hora_inicio}`).toLocaleTimeString('es-ES', { 
+                                hour: '2-digit', 
+                                minute: '2-digit' 
+                            });
+                            contenido += `<br><div class="calendar-event">${tutoria.tema} ${hora}</div>`;
+                        });
+                        
+                        celda.innerHTML = contenido;
                         fecha++;
                     }
                     
@@ -1456,76 +1555,77 @@
         const campoArchivo = document.getElementById('campoArchivo');
         const campoEnlace = document.getElementById('campoEnlace');
         
-        tipoRecurso.addEventListener('change', function() {
-            if (this.value === 'enlace') {
-                campoArchivo.style.display = 'none';
-                campoEnlace.style.display = 'block';
-            } else {
-                campoArchivo.style.display = 'block';
-                campoEnlace.style.display = 'none';
-            }
-        });
-        
-        document.getElementById('formSubirRecurso').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nombre = document.getElementById('nombreRecurso').value;
-            const tipo = document.getElementById('tipoRecurso').value;
-            const descripcion = document.getElementById('descripcionRecurso').value;
-            
-            // Simular subida de recurso
-            const recursos = [
-                {
-                    nombre: nombre,
-                    tipo: tipo,
-                    descripcion: descripcion,
-                    fecha: new Date().toLocaleDateString(),
-                    icono: tipo === 'documento' ? 'file-pdf' : 
-                           tipo === 'presentacion' ? 'file-powerpoint' : 
-                           tipo === 'video' ? 'file-video' : 'link',
-                    color: tipo === 'documento' ? 'danger' : 
-                          tipo === 'presentacion' ? 'warning' : 
-                          tipo === 'video' ? 'primary' : 'success'
+        if (tipoRecurso) {
+            tipoRecurso.addEventListener('change', function() {
+                if (this.value === 'enlace') {
+                    campoArchivo.style.display = 'none';
+                    campoEnlace.style.display = 'block';
+                    document.getElementById('archivoRecurso').removeAttribute('required');
+                    document.getElementById('enlaceRecurso').setAttribute('required', 'required');
+                } else {
+                    campoArchivo.style.display = 'block';
+                    campoEnlace.style.display = 'none';
+                    document.getElementById('archivoRecurso').setAttribute('required', 'required');
+                    document.getElementById('enlaceRecurso').removeAttribute('required');
                 }
-            ];
-            
-            actualizarListaRecursos(recursos);
-            
-            // Cerrar modal y resetear formulario
-            const modal = bootstrap.Modal.getInstance(document.getElementById('subirRecursoModal'));
-            modal.hide();
-            this.reset();
-            
-            alert('Recurso subido correctamente');
-        });
-        
-        function actualizarListaRecursos(recursos) {
-            const lista = document.getElementById('listaRecursos');
-            lista.innerHTML = '';
-            
-            recursos.forEach(recurso => {
-                const col = document.createElement('div');
-                col.className = 'col-md-4 mb-4';
-                col.innerHTML = `
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-${recurso.icono} fa-3x text-${recurso.color} mb-3"></i>
-                            <h5>${recurso.nombre}</h5>
-                            <p class="text-muted">${recurso.tipo.charAt(0).toUpperCase() + recurso.tipo.slice(1)}</p>
-                            <p class="small">${recurso.descripcion}</p>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-outline-custom btn-sm">Descargar</button>
-                                <button class="btn btn-outline-custom btn-sm">Compartir</button>
-                            </div>
-                        </div>
-                        <div class="card-footer text-muted">
-                            Subido: ${recurso.fecha}
-                        </div>
-                    </div>
-                `;
-                lista.appendChild(col);
             });
         }
+        
+        // Previsualización de recursos
+        document.querySelectorAll('.btn-preview').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const recursoId = this.getAttribute('data-recurso-id');
+                const recurso = @json($recursos).find(r => r.id == recursoId);
+                
+                if (recurso) {
+                    const previewModal = new bootstrap.Modal(document.getElementById('previewRecursoModal'));
+                    const previewContent = document.getElementById('previewContent');
+                    const downloadBtn = document.getElementById('downloadPreviewBtn');
+                    
+                    downloadBtn.href = `/recursos/${recurso.id}/download`;
+                    
+                    if (recurso.tipo === 'documento') {
+                        previewContent.innerHTML = `
+                            <div class="alert alert-info">
+                                <i class="fas fa-file-pdf fa-3x mb-3"></i>
+                                <h5>${recurso.nombre}</h5>
+                                <p>Este es un documento PDF. Para previsualizarlo, descárguelo y ábralo con un visor de PDF.</p>
+                                <p><small>${recurso.descripcion}</small></p>
+                            </div>
+                        `;
+                    } else if (recurso.tipo === 'presentacion') {
+                        previewContent.innerHTML = `
+                            <div class="alert alert-warning">
+                                <i class="fas fa-file-powerpoint fa-3x mb-3"></i>
+                                <h5>${recurso.nombre}</h5>
+                                <p>Esta es una presentación. Para previsualizarla, descárguela y ábrala con un visor de presentaciones.</p>
+                                <p><small>${recurso.descripcion}</small></p>
+                            </div>
+                        `;
+                    } else if (recurso.tipo === 'video') {
+                        previewContent.innerHTML = `
+                            <div class="alert alert-primary">
+                                <i class="fas fa-file-video fa-3x mb-3"></i>
+                                <h5>${recurso.nombre}</h5>
+                                <p>Este es un archivo de video. Para previsualizarlo, descárguelo y reprodúzcalo con un reproductor de video.</p>
+                                <p><small>${recurso.descripcion}</small></p>
+                            </div>
+                        `;
+                    } else {
+                        previewContent.innerHTML = `
+                            <div class="alert alert-success">
+                                <i class="fas fa-link fa-3x mb-3"></i>
+                                <h5>${recurso.nombre}</h5>
+                                <p>Enlace: <a href="${recurso.enlace}" target="_blank">${recurso.enlace}</a></p>
+                                <p><small>${recurso.descripcion}</small></p>
+                            </div>
+                        `;
+                    }
+                    
+                    previewModal.show();
+                }
+            });
+        });
 
         // Funcionalidad de estudiantes
         document.querySelectorAll('.btn-contactar').forEach(btn => {
@@ -1550,19 +1650,6 @@
                 bsAlert.close();
             });
         }, 5000);
-
-        // Simular envío de formularios
-        document.getElementById('formAsistencia')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Asistencia registrada correctamente');
-            // Aquí iría la lógica real de envío del formulario
-        });
-        
-        document.getElementById('formHorario')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Horario actualizado correctamente');
-            // Aquí iría la lógica real de envío del formulario
-        });
     </script>
 </body>
 </html>

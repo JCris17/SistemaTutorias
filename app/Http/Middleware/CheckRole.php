@@ -24,5 +24,7 @@ class CheckRole
         }
 
         abort(403, 'No tienes permisos para acceder a esta página.');
+
     }
 }
+    
